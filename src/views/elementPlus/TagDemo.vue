@@ -108,6 +108,116 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tag&gt;标签一&lt;/el-tag&gt;
+&lt;el-tag&gt;标签二&lt;/el-tag&gt;
+&lt;el-tag&gt;标签三&lt;/el-tag&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 不同类型</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tag&gt;默认标签&lt;/el-tag&gt;
+&lt;el-tag type="success"&gt;成功标签&lt;/el-tag&gt;
+&lt;el-tag type="info"&gt;信息标签&lt;/el-tag&gt;
+&lt;el-tag type="warning"&gt;警告标签&lt;/el-tag&gt;
+&lt;el-tag type="danger"&gt;危险标签&lt;/el-tag&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 不同尺寸</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tag size="large"&gt;大标签&lt;/el-tag&gt;
+&lt;el-tag size="default"&gt;默认标签&lt;/el-tag&gt;
+&lt;el-tag size="small"&gt;小标签&lt;/el-tag&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 不同主题</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tag effect="dark"&gt;深色标签&lt;/el-tag&gt;
+&lt;el-tag effect="light"&gt;浅色标签&lt;/el-tag&gt;
+&lt;el-tag effect="plain"&gt;朴素标签&lt;/el-tag&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 可关闭标签</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tag 
+  v-for="tag in tags" 
+  :key="tag" 
+  closable 
+  @close="handleClose(tag)"
+&gt;
+  {{ tag }}
+&lt;/el-tag&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+
+const tags = ref(['标签一', '标签二', '标签三'])
+
+const handleClose = (tag) => {
+  const index = tags.value.indexOf(tag)
+  if (index > -1) {
+    tags.value.splice(index, 1)
+  }
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 自定义颜色</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tag color="#f50"&gt;自定义颜色&lt;/el-tag&gt;
+&lt;el-tag color="#2db7f5"&gt;自定义颜色&lt;/el-tag&gt;
+&lt;el-tag color="#87d068"&gt;自定义颜色&lt;/el-tag&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>7. 圆角标签</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tag round&gt;圆角标签&lt;/el-tag&gt;
+&lt;el-tag type="success" round&gt;圆角成功标签&lt;/el-tag&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>8. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tag 
+  closable 
+  @close="handleClose" 
+  @click="handleClick"
+&gt;
+  可点击标签
+&lt;/el-tag&gt;
+
+&lt;script setup&gt;
+const handleClose = () => {
+  console.log('标签关闭')
+}
+
+const handleClick = () => {
+  console.log('标签点击')
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -361,5 +471,31 @@ const handleCloseTag = (tag) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

@@ -4,7 +4,7 @@
       <template #header>
         <div class="card-header">
           <span>Scrollbar 滚动条</span>
-          <el-button type="primary" @click="show = true">属性设置</el-button>
+          <el-button type="primary" @click="openDrawer">属性设置</el-button>
         </div>
       </template>
       
@@ -142,7 +142,7 @@
             <div class="code-block">
               <pre><code>&lt;el-scrollbar height="400px"&gt;
   &lt;div v-for="item in list" :key="item.id"&gt;
-    {{ item.content }}
+    &#123;&#123; item.content &#125;&#125;
   &lt;/div&gt;
 &lt;/el-scrollbar&gt;</code></pre>
             </div>
@@ -204,6 +204,11 @@ const cfg = reactive({
 })
 
 // 方法
+const openDrawer = () => {
+  console.log('打开滚动条设置抽屉')
+  show.value = true
+}
+
 const onScroll = ({ scrollTop, scrollLeft }) => {
   console.log('滚动位置:', scrollTop, scrollLeft)
   ElMessage.info(`滚动位置: ${scrollTop}px`)
@@ -226,6 +231,22 @@ const onScroll = ({ scrollTop, scrollLeft }) => {
 .label-text { font-size: 14px; font-weight: 600; color: #303133; margin-bottom: 4px; }
 .prop-name { font-size: 12px; color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-bottom: 12px; font-family: 'Courier New', monospace; }
 .help-text { font-size: 12px; color: #909399; margin-top: 8px; line-height: 1.4; }
-.code-block { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 12px; margin: 8px 0; }
-.code-block pre { margin: 0; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; }
+.code-block { 
+  background: #f8f9fa; 
+  border: 1px solid #e9ecef; 
+  border-radius: 4px; 
+  padding: 12px; 
+  margin: 8px 0; 
+  overflow-x: auto;
+  max-width: 100%;
+}
+.code-block pre { 
+  margin: 0; 
+  font-family: 'Courier New', monospace; 
+  font-size: 12px; 
+  line-height: 1.4; 
+  white-space: pre;
+  overflow-x: auto;
+  min-width: max-content;
+}
 </style>

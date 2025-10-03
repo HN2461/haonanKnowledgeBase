@@ -109,6 +109,150 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-timeline&gt;
+  &lt;el-timeline-item timestamp="2018/4/12"&gt;
+    创建 Github 仓库
+  &lt;/el-timeline-item&gt;
+  &lt;el-timeline-item timestamp="2018/4/15"&gt;
+    提交代码
+  &lt;/el-timeline-item&gt;
+  &lt;el-timeline-item timestamp="2018/4/20"&gt;
+    发布版本
+  &lt;/el-timeline-item&gt;
+&lt;/el-timeline&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 不同状态</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-timeline&gt;
+  &lt;el-timeline-item timestamp="2018/4/12" type="primary"&gt;
+    主要事件
+  &lt;/el-timeline-item&gt;
+  &lt;el-timeline-item timestamp="2018/4/15" type="success"&gt;
+    成功事件
+  &lt;/el-timeline-item&gt;
+  &lt;el-timeline-item timestamp="2018/4/20" type="warning"&gt;
+    警告事件
+  &lt;/el-timeline-item&gt;
+  &lt;el-timeline-item timestamp="2018/4/25" type="danger"&gt;
+    危险事件
+  &lt;/el-timeline-item&gt;
+&lt;/el-timeline&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 自定义图标</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-timeline&gt;
+  &lt;el-timeline-item 
+    timestamp="2018/4/12" 
+    type="primary" 
+    icon="el-icon-edit"
+  &gt;
+    编辑事件
+  &lt;/el-timeline-item&gt;
+  &lt;el-timeline-item 
+    timestamp="2018/4/15" 
+    type="success" 
+    icon="el-icon-check"
+  &gt;
+    完成事件
+  &lt;/el-timeline-item&gt;
+&lt;/el-timeline&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 自定义颜色</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-timeline&gt;
+  &lt;el-timeline-item 
+    timestamp="2018/4/12" 
+    color="#409eff"
+  &gt;
+    自定义颜色事件
+  &lt;/el-timeline-item&gt;
+  &lt;el-timeline-item 
+    timestamp="2018/4/15" 
+    color="#67c23a"
+  &gt;
+    绿色事件
+  &lt;/el-timeline-item&gt;
+&lt;/el-timeline&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 时间戳位置</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-timeline&gt;
+  &lt;el-timeline-item timestamp="2018/4/12" placement="top"&gt;
+    时间戳在上方
+  &lt;/el-timeline-item&gt;
+  &lt;el-timeline-item timestamp="2018/4/15" placement="bottom"&gt;
+    时间戳在下方
+  &lt;/el-timeline-item&gt;
+&lt;/el-timeline&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 空心节点</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-timeline&gt;
+  &lt;el-timeline-item 
+    timestamp="2018/4/12" 
+    type="primary" 
+    hollow
+  &gt;
+    空心节点
+  &lt;/el-timeline-item&gt;
+  &lt;el-timeline-item 
+    timestamp="2018/4/15" 
+    type="success" 
+    hollow
+  &gt;
+    空心成功节点
+  &lt;/el-timeline-item&gt;
+&lt;/el-timeline&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>7. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-timeline @timeline-item-click="handleTimelineItemClick"&gt;
+  &lt;el-timeline-item 
+    timestamp="2018/4/12" 
+    @click="handleItemClick"
+  &gt;
+    可点击事件
+  &lt;/el-timeline-item&gt;
+&lt;/el-timeline&gt;
+
+&lt;script setup&gt;
+const handleTimelineItemClick = (item) => {
+  console.log('时间线项目点击:', item)
+}
+
+const handleItemClick = (event) => {
+  console.log('项目点击:', event)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -359,5 +503,31 @@ const removeTimelineItem = (index) => {
   border: 1px solid #dcdfe6;
   border-radius: 4px;
   flex-wrap: wrap;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

@@ -73,6 +73,82 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-empty description="暂无数据"&gt;&lt;/el-empty&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 带操作按钮</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-empty description="暂无数据"&gt;
+  &lt;el-button type="primary"&gt;操作按钮&lt;/el-button&gt;
+&lt;/el-empty&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 自定义图片</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-empty
+  image="https://example.com/empty.png"
+  description="自定义图片"
+&gt;&lt;/el-empty&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 自定义图片尺寸</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-empty
+  :image-size="200"
+  description="大图片"
+&gt;&lt;/el-empty&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 自定义图标</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-empty&gt;
+  &lt;template #image&gt;
+    &lt;el-icon size="100" color="#409eff"&gt;
+      &lt;Document /&gt;
+    &lt;/el-icon&gt;
+  &lt;/template&gt;
+  &lt;template #description&gt;
+    &lt;p&gt;自定义描述内容&lt;/p&gt;
+  &lt;/template&gt;
+  &lt;el-button type="primary"&gt;自定义操作&lt;/el-button&gt;
+&lt;/el-empty&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-empty description="暂无数据"&gt;
+  &lt;el-button type="primary" @click="handleAction"&gt;
+    操作按钮
+  &lt;/el-button&gt;
+&lt;/el-empty&gt;
+
+&lt;script setup&gt;
+const handleAction = () => {
+  console.log('操作按钮点击')
+  ElMessage.success('操作成功')
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -248,5 +324,31 @@ const handleCustomAction = () => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

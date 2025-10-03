@@ -100,6 +100,95 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-steps :active="active"&gt;
+  &lt;el-step title="步骤1" description="这是步骤1"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤2" description="这是步骤2"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤3" description="这是步骤3"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤4" description="这是步骤4"&gt;&lt;/el-step&gt;
+&lt;/el-steps&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 不同方向</h5>
+            <div class="code-block">
+              <pre><code>&lt;!-- 水平方向 --&gt;
+&lt;el-steps :active="active" direction="horizontal"&gt;
+  &lt;el-step title="步骤1"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤2"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤3"&gt;&lt;/el-step&gt;
+&lt;/el-steps&gt;
+
+&lt;!-- 垂直方向 --&gt;
+&lt;el-steps :active="active" direction="vertical"&gt;
+  &lt;el-step title="步骤1"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤2"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤3"&gt;&lt;/el-step&gt;
+&lt;/el-steps&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 带图标</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-steps :active="active"&gt;
+  &lt;el-step title="步骤1" icon="el-icon-edit"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤2" icon="el-icon-upload"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤3" icon="el-icon-picture"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤4" icon="el-icon-check"&gt;&lt;/el-step&gt;
+&lt;/el-steps&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 不同状态</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-steps :active="active" finish-status="success"&gt;
+  &lt;el-step title="已完成" status="finish"&gt;&lt;/el-step&gt;
+  &lt;el-step title="进行中" status="process"&gt;&lt;/el-step&gt;
+  &lt;el-step title="待处理" status="wait"&gt;&lt;/el-step&gt;
+  &lt;el-step title="错误" status="error"&gt;&lt;/el-step&gt;
+&lt;/el-steps&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 简洁模式</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-steps :active="active" simple&gt;
+  &lt;el-step title="步骤1"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤2"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤3"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤4"&gt;&lt;/el-step&gt;
+&lt;/el-steps&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-steps :active="active" @change="handleChange"&gt;
+  &lt;el-step title="步骤1"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤2"&gt;&lt;/el-step&gt;
+  &lt;el-step title="步骤3"&gt;&lt;/el-step&gt;
+&lt;/el-steps&gt;
+
+&lt;script setup&gt;
+const handleChange = (val) => {
+  console.log('步骤改变:', val)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -375,5 +464,31 @@ const removeStep = (index) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

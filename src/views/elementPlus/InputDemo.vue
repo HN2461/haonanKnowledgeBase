@@ -313,6 +313,108 @@
             <div class="help-text">inputmode 是原生输入法提示属性，用于建议浏览器在聚焦时展示何种输入键盘布局（主要对移动端虚拟键盘有效）</div>
           </div>
         </div>
+        
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="form-item">
+            <div class="label-text">基本用法</div>
+            <div class="prop-name">基本用法</div>
+            <div class="code-block">
+              <pre><code>&lt;el-input v-model="input" placeholder="请输入内容" /&gt;</code></pre>
+            </div>
+            <div class="help-text">输入框的基本使用方式</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">禁用状态</div>
+            <div class="prop-name">禁用状态</div>
+            <div class="code-block">
+              <pre><code>&lt;el-input v-model="input" placeholder="请输入内容" disabled /&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 disabled 属性可以禁用输入框</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">可清空</div>
+            <div class="prop-name">可清空</div>
+            <div class="code-block">
+              <pre><code>&lt;el-input v-model="input" placeholder="请输入内容" clearable /&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 clearable 属性可以显示清除按钮</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">密码框</div>
+            <div class="prop-name">密码框</div>
+            <div class="code-block">
+              <pre><code>&lt;el-input v-model="input" type="password" placeholder="请输入密码" show-password /&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 type="password" 和 show-password 可以显示密码切换按钮</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">带图标的输入框</div>
+            <div class="prop-name">带图标的输入框</div>
+            <div class="code-block">
+              <pre><code>&lt;el-input v-model="input" placeholder="请输入内容"&gt;
+  &lt;template #prefix&gt;
+    &lt;el-icon&gt;&lt;Search /&gt;&lt;/el-icon&gt;
+  &lt;/template&gt;
+&lt;/el-input&gt;
+
+&lt;el-input v-model="input" placeholder="请输入内容"&gt;
+  &lt;template #suffix&gt;
+    &lt;el-icon&gt;&lt;Calendar /&gt;&lt;/el-icon&gt;
+  &lt;/template&gt;
+&lt;/el-input&gt;</code></pre>
+            </div>
+            <div class="help-text">使用 prefix 和 suffix 插槽可以添加前后图标</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">带前后缀的输入框</div>
+            <div class="prop-name">带前后缀的输入框</div>
+            <div class="code-block">
+              <pre><code>&lt;el-input v-model="input" placeholder="请输入内容"&gt;
+  &lt;template #prepend&gt;Http://&lt;/template&gt;
+&lt;/el-input&gt;
+
+&lt;el-input v-model="input" placeholder="请输入内容"&gt;
+  &lt;template #append&gt;.com&lt;/template&gt;
+&lt;/el-input&gt;</code></pre>
+            </div>
+            <div class="help-text">使用 prepend 和 append 插槽可以添加前后缀内容</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">多行文本</div>
+            <div class="prop-name">多行文本</div>
+            <div class="code-block">
+              <pre><code>&lt;el-input v-model="textarea" type="textarea" :rows="2" placeholder="请输入内容" /&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 type="textarea" 可以显示为多行文本输入框</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">自适应高度</div>
+            <div class="prop-name">自适应高度</div>
+            <div class="code-block">
+              <pre><code>&lt;el-input v-model="textarea" type="textarea" :autosize="{ minRows: 2, maxRows: 4 }" placeholder="请输入内容" /&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 autosize 属性可以让文本域自适应高度</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">字数限制</div>
+            <div class="prop-name">字数限制</div>
+            <div class="code-block">
+              <pre><code>&lt;el-input v-model="input" maxlength="10" show-word-limit placeholder="请输入内容" /&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 maxlength 和 show-word-limit 可以显示字数限制</div>
+          </div>
+        </div>
       </div>
     </el-drawer>
   </div>
@@ -412,4 +514,6 @@ const onLog = (name) => console.debug('[InputDemo]', name)
 .prop-name { font-size: 12px; color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-bottom: 12px; font-family: 'Courier New', monospace; }
 .help-text { font-size: 12px; color: #909399; margin-top: 8px; line-height: 1.4; }
 .inline-opts { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.code-block { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 12px; margin: 8px 0; }
+.code-block pre { margin: 0; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; }
 </style>

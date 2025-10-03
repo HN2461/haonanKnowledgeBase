@@ -191,6 +191,135 @@
           </div>
         </div>
 
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">基础用法</span>
+              <span class="help-text">级联选择器的基本使用方式</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-cascader
+  v-model="value"
+  :options="options"
+  placeholder="请选择"
+  clearable
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">多选模式</span>
+              <span class="help-text">支持多选功能</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-cascader
+  v-model="value"
+  :options="options"
+  :props="{ multiple: true }"
+  placeholder="请选择多个"
+  clearable
+  collapse-tags
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">可搜索</span>
+              <span class="help-text">支持搜索功能</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-cascader
+  v-model="value"
+  :options="options"
+  :filterable="true"
+  placeholder="可搜索选择"
+  clearable
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">懒加载</span>
+              <span class="help-text">支持懒加载数据</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-cascader
+  v-model="value"
+  :options="options"
+  :props="{
+    lazy: true,
+    lazyLoad: lazyLoad
+  }"
+  placeholder="懒加载选择"
+/&gt;
+
+&lt;script setup&gt;
+const lazyLoad = (node, resolve) => {
+  // 懒加载逻辑
+  setTimeout(() => {
+    resolve([
+      { value: '1', label: '选项1', leaf: true },
+      { value: '2', label: '选项2', leaf: true }
+    ])
+  }, 1000)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">自定义数据字段</span>
+              <span class="help-text">自定义数据字段映射</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-cascader
+  v-model="value"
+  :options="options"
+  :props="{
+    value: 'id',
+    label: 'name',
+    children: 'children'
+  }"
+  placeholder="自定义字段"
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">事件处理</span>
+              <span class="help-text">监听级联选择器事件</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-cascader
+  v-model="value"
+  :options="options"
+  @change="handleChange"
+  @expand-change="handleExpandChange"
+  @blur="handleBlur"
+  @focus="handleFocus"
+/&gt;
+
+&lt;script setup&gt;
+const handleChange = (value) => {
+  console.log('选中值:', value)
+}
+
+const handleExpandChange = (value) => {
+  console.log('展开节点:', value)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+
         <!-- 数据管理 -->
         <div class="form-section">
           <div class="section-title">数据管理</div>
@@ -468,5 +597,20 @@ const removeOptionItem = (index) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
 }
 </style>

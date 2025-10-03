@@ -242,6 +242,94 @@
             <div class="help-text">两个中文字符之间自动插入空格</div>
           </div>
         </div>
+        
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="form-item">
+            <div class="label-text">基本用法</div>
+            <div class="prop-name">基本用法</div>
+            <div class="code-block">
+              <pre><code>&lt;el-button&gt;默认按钮&lt;/el-button&gt;
+&lt;el-button type="primary"&gt;主要按钮&lt;/el-button&gt;
+&lt;el-button type="success"&gt;成功按钮&lt;/el-button&gt;
+&lt;el-button type="info"&gt;信息按钮&lt;/el-button&gt;
+&lt;el-button type="warning"&gt;警告按钮&lt;/el-button&gt;
+&lt;el-button type="danger"&gt;危险按钮&lt;/el-button&gt;</code></pre>
+            </div>
+            <div class="help-text">按钮的基本使用方式，支持多种类型</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">朴素按钮</div>
+            <div class="prop-name">朴素按钮</div>
+            <div class="code-block">
+              <pre><code>&lt;el-button plain&gt;朴素按钮&lt;/el-button&gt;
+&lt;el-button type="primary" plain&gt;主要按钮&lt;/el-button&gt;
+&lt;el-button type="success" plain&gt;成功按钮&lt;/el-button&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 plain 属性可以显示为朴素按钮</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">圆角按钮</div>
+            <div class="prop-name">圆角按钮</div>
+            <div class="code-block">
+              <pre><code>&lt;el-button round&gt;圆角按钮&lt;/el-button&gt;
+&lt;el-button type="primary" round&gt;主要按钮&lt;/el-button&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 round 属性可以显示为圆角按钮</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">圆形按钮</div>
+            <div class="prop-name">圆形按钮</div>
+            <div class="code-block">
+              <pre><code>&lt;el-button circle&gt;
+  &lt;el-icon&gt;&lt;Search /&gt;&lt;/el-icon&gt;
+&lt;/el-button&gt;
+&lt;el-button type="primary" circle&gt;
+  &lt;el-icon&gt;&lt;Edit /&gt;&lt;/el-icon&gt;
+&lt;/el-button&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 circle 属性可以显示为圆形按钮，建议配合图标使用</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">禁用状态</div>
+            <div class="prop-name">禁用状态</div>
+            <div class="code-block">
+              <pre><code>&lt;el-button disabled&gt;禁用按钮&lt;/el-button&gt;
+&lt;el-button type="primary" disabled&gt;禁用按钮&lt;/el-button&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 disabled 属性可以禁用按钮</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">加载状态</div>
+            <div class="prop-name">加载状态</div>
+            <div class="code-block">
+              <pre><code>&lt;el-button :loading="true"&gt;加载中&lt;/el-button&gt;
+&lt;el-button type="primary" :loading="loading" @click="handleClick"&gt;
+  {{ loading ? '加载中' : '点击加载' }}
+&lt;/el-button&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 loading 属性可以显示加载状态</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">按钮组</div>
+            <div class="prop-name">按钮组</div>
+            <div class="code-block">
+              <pre><code>&lt;el-button-group&gt;
+  &lt;el-button type="primary"&gt;上一页&lt;/el-button&gt;
+  &lt;el-button type="primary"&gt;下一页&lt;/el-button&gt;
+&lt;/el-button-group&gt;</code></pre>
+            </div>
+            <div class="help-text">使用 el-button-group 可以创建按钮组</div>
+          </div>
+        </div>
       </div>
     </el-drawer>
   </div>
@@ -303,4 +391,6 @@ const loadingIconComp = computed(() => {
 .label-text { font-size: 14px; font-weight: 600; color: #303133; margin-bottom: 4px; }
 .prop-name { font-size: 12px; color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-bottom: 12px; font-family: 'Courier New', monospace; }
 .help-text { font-size: 12px; color: #909399; margin-top: 8px; line-height: 1.4; }
+.code-block { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 12px; margin: 8px 0; }
+.code-block pre { margin: 0; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; }
 </style>

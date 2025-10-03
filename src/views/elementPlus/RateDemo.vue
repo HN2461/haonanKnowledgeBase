@@ -87,6 +87,75 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-rate v-model="value"&gt;&lt;/el-rate&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 半星评分</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-rate
+  v-model="value"
+  allow-half
+  show-text
+  :texts="['极差', '失望', '一般', '满意', '惊喜']"
+&gt;&lt;/el-rate&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 自定义图标</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-rate
+  v-model="value"
+  :icon-classes="['el-icon-star-on', 'el-icon-star-on', 'el-icon-star-on']"
+  void-icon-class="el-icon-star-off"
+&gt;&lt;/el-rate&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 只读评分</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-rate
+  v-model="value"
+  disabled
+  show-score
+  text-color="#ff9900"
+  score-template="{value} 分"
+&gt;&lt;/el-rate&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-rate
+  v-model="value"
+  @change="handleChange"
+  @click="handleClick"
+&gt;&lt;/el-rate&gt;
+
+&lt;script setup&gt;
+const handleChange = (val) => {
+  console.log('评分改变:', val)
+}
+
+const handleClick = (val) => {
+  console.log('点击评分:', val)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -462,5 +531,31 @@ const removeText = () => {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

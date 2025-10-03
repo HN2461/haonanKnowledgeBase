@@ -282,6 +282,111 @@
             <div class="help-text">不同格式的显示效果</div>
           </div>
         </div>
+        
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="form-item">
+            <div class="label-text">基本用法</div>
+            <div class="prop-name">基本用法</div>
+            <div class="code-block">
+              <pre><code>&lt;el-date-picker v-model="value" type="date" placeholder="选择日期" /&gt;</code></pre>
+            </div>
+            <div class="help-text">日期选择器的基本使用方式</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">日期时间选择器</div>
+            <div class="prop-name">日期时间选择器</div>
+            <div class="code-block">
+              <pre><code>&lt;el-date-picker v-model="value" type="datetime" placeholder="选择日期时间" /&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 type="datetime" 可以选择日期和时间</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">日期范围选择器</div>
+            <div class="prop-name">日期范围选择器</div>
+            <div class="code-block">
+              <pre><code>&lt;el-date-picker v-model="value" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" /&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 type="daterange" 可以选择日期范围</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">年份选择器</div>
+            <div class="prop-name">年份选择器</div>
+            <div class="code-block">
+              <pre><code>&lt;el-date-picker v-model="value" type="year" placeholder="选择年份" /&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 type="year" 可以选择年份</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">月份选择器</div>
+            <div class="prop-name">月份选择器</div>
+            <div class="code-block">
+              <pre><code>&lt;el-date-picker v-model="value" type="month" placeholder="选择月份" /&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 type="month" 可以选择月份</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">时间选择器</div>
+            <div class="prop-name">时间选择器</div>
+            <div class="code-block">
+              <pre><code>&lt;el-date-picker v-model="value" type="time" placeholder="选择时间" /&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 type="time" 可以选择时间</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">自定义格式</div>
+            <div class="prop-name">自定义格式</div>
+            <div class="code-block">
+              <pre><code>&lt;el-date-picker v-model="value" type="date" format="YYYY年MM月DD日" value-format="YYYY-MM-DD" placeholder="选择日期" /&gt;</code></pre>
+            </div>
+            <div class="help-text">使用 format 和 value-format 可以自定义显示格式和值格式</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">快捷选项</div>
+            <div class="prop-name">快捷选项</div>
+            <div class="code-block">
+              <pre><code>&lt;el-date-picker v-model="value" type="date" :shortcuts="shortcuts" placeholder="选择日期" /&gt;
+
+const shortcuts = [
+  {
+    text: '今天',
+    value: new Date()
+  },
+  {
+    text: '昨天',
+    value: () => {
+      const date = new Date()
+      date.setTime(date.getTime() - 3600 * 1000 * 24)
+      return date
+    }
+  }
+]</code></pre>
+            </div>
+            <div class="help-text">使用 shortcuts 属性可以添加快捷选项</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">禁用日期</div>
+            <div class="prop-name">禁用日期</div>
+            <div class="code-block">
+              <pre><code>&lt;el-date-picker v-model="value" type="date" :disabled-date="disabledDate" placeholder="选择日期" /&gt;
+
+const disabledDate = (time) => {
+  return time.getTime() > Date.now()
+}</code></pre>
+            </div>
+            <div class="help-text">使用 disabled-date 属性可以禁用某些日期</div>
+          </div>
+        </div>
       </div>
     </el-drawer>
   </div>
@@ -446,4 +551,6 @@ const onUI = (name) => ElMessage.info(`触发事件: ${name}`)
 .format-examples { margin: 8px 0; }
 .format-example { margin: 4px 0; font-size: 13px; }
 .format-example code { background: #f5f7fa; padding: 2px 4px; border-radius: 3px; font-family: 'Courier New', monospace; }
+.code-block { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 12px; margin: 8px 0; }
+.code-block pre { margin: 0; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; }
 </style>

@@ -84,6 +84,109 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">基础用法</span>
+              <span class="help-text">固钉的基本使用方式</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-affix :offset="0"&gt;
+  &lt;el-button type="primary"&gt;固定在顶部&lt;/el-button&gt;
+&lt;/el-affix&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">不同位置</span>
+              <span class="help-text">固定在顶部或底部</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;!-- 固定在顶部 --&gt;
+&lt;el-affix :offset="20" position="top"&gt;
+  &lt;el-button type="success"&gt;顶部固定&lt;/el-button&gt;
+&lt;/el-affix&gt;
+
+&lt;!-- 固定在底部 --&gt;
+&lt;el-affix :offset="20" position="bottom"&gt;
+  &lt;el-button type="warning"&gt;底部固定&lt;/el-button&gt;
+&lt;/el-affix&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">偏移距离</span>
+              <span class="help-text">设置固定位置的偏移距离</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-affix :offset="50"&gt;
+  &lt;el-button&gt;50px偏移&lt;/el-button&gt;
+&lt;/el-affix&gt;
+
+&lt;el-affix :offset="100"&gt;
+  &lt;el-button&gt;100px偏移&lt;/el-button&gt;
+&lt;/el-affix&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">指定容器</span>
+              <span class="help-text">指定固钉的容器元素</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;div ref="container"&gt;
+  &lt;el-affix :target="container"&gt;
+    &lt;el-button&gt;容器内固定&lt;/el-button&gt;
+  &lt;/el-affix&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">层级设置</span>
+              <span class="help-text">设置固钉元素的层级</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-affix :z-index="1000"&gt;
+  &lt;el-button&gt;高层级固定&lt;/el-button&gt;
+&lt;/el-affix&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">事件处理</span>
+              <span class="help-text">监听固钉状态变化</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-affix
+  :offset="0"
+  @change="handleChange"
+  @scroll="handleScroll"
+&gt;
+  &lt;el-button&gt;固定按钮&lt;/el-button&gt;
+&lt;/el-affix&gt;
+
+&lt;script setup&gt;
+const handleChange = (fixed) => {
+  console.log('固钉状态:', fixed ? '已固定' : '未固定')
+}
+
+const handleScroll = (event) => {
+  console.log('滚动事件:', event)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -299,5 +402,20 @@ const handleScroll = (event) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
 }
 </style>

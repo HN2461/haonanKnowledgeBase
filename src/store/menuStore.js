@@ -90,6 +90,7 @@ export const useMenuStore = defineStore('menu', () => {
             { index: 'ep-transfer', title: '穿梭框 Transfer', path: '/ep/transfer' },
             { index: 'ep-tree-select', title: '树形选择器 TreeSelect', path: '/ep/tree-select' },
             { index: 'ep-cascader', title: '级联选择器 Cascader', path: '/ep/cascader' },
+            { index: 'ep-autocomplete', title: '自动补全 Autocomplete', path: '/ep/autocomplete' },
             { index: 'ep-form-demo', title: '表单 Form', path: '/ep/form' }
           ]
         },
@@ -110,7 +111,8 @@ export const useMenuStore = defineStore('menu', () => {
             { index: 'ep-empty', title: '空状态 Empty', path: '/ep/empty' },
             { index: 'ep-result', title: '结果 Result', path: '/ep/result' },
             { index: 'ep-skeleton', title: '骨架屏 Skeleton', path: '/ep/skeleton' },
-            { index: 'ep-scrollbar', title: '滚动条 Scrollbar', path: '/ep/scrollbar' }
+            { index: 'ep-scrollbar', title: '滚动条 Scrollbar', path: '/ep/scrollbar' },
+            { index: 'ep-carousel', title: '走马灯 Carousel', path: '/ep/carousel' }
           ]
         },
         {

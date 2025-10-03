@@ -95,6 +95,123 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-select v-model="value" /&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+const value = ref('')
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 设置时间范围</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-select 
+  v-model="value" 
+  :start="'08:30'" 
+  :end="'18:30'" 
+  :step="'00:15'" 
+  placeholder="选择时间" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 设置最小/最大时间</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-select 
+  v-model="value" 
+  :start="'08:30'" 
+  :end="'18:30'" 
+  :step="'00:15'" 
+  :min-time="'09:00'" 
+  :max-time="'17:00'" 
+  placeholder="选择时间" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 自定义格式</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-select 
+  v-model="value" 
+  :start="'08:30'" 
+  :end="'18:30'" 
+  :step="'00:15'" 
+  format="HH:mm" 
+  value-format="HH:mm" 
+  placeholder="选择时间" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 禁用状态</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-select 
+  v-model="value" 
+  :start="'08:30'" 
+  :end="'18:30'" 
+  :step="'00:15'" 
+  disabled 
+  placeholder="禁用状态" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 只读状态</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-select 
+  v-model="value" 
+  :start="'08:30'" 
+  :end="'18:30'" 
+  :step="'00:15'" 
+  readonly 
+  placeholder="只读状态" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>7. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-select 
+  v-model="value" 
+  :start="'08:30'" 
+  :end="'18:30'" 
+  :step="'00:15'" 
+  @change="handleChange" 
+  @blur="handleBlur" 
+  @focus="handleFocus" 
+/&gt;
+
+&lt;script setup&gt;
+const handleChange = (value) => {
+  console.log('时间改变:', value)
+}
+
+const handleBlur = (event) => {
+  console.log('失去焦点:', event)
+}
+
+const handleFocus = (event) => {
+  console.log('获得焦点:', event)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -411,5 +528,31 @@ const handleLimitChange = (value) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

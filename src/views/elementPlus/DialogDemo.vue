@@ -293,6 +293,107 @@
             <div class="help-text">对话框的 aria-label 属性</div>
           </div>
         </div>
+        
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="form-item">
+            <div class="label-text">基本用法</div>
+            <div class="prop-name">基本用法</div>
+            <div class="code-block">
+              <pre><code>&lt;el-dialog v-model="visible" title="提示" width="30%"&gt;
+  &lt;span&gt;这是一段信息&lt;/span&gt;
+  &lt;template #footer&gt;
+    &lt;el-button @click="visible = false"&gt;取消&lt;/el-button&gt;
+    &lt;el-button type="primary" @click="visible = false"&gt;确定&lt;/el-button&gt;
+  &lt;/template&gt;
+&lt;/el-dialog&gt;</code></pre>
+            </div>
+            <div class="help-text">对话框的基本使用方式</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">自定义内容</div>
+            <div class="prop-name">自定义内容</div>
+            <div class="code-block">
+              <pre><code>&lt;el-dialog v-model="visible" title="编辑用户" width="50%"&gt;
+  &lt;el-form :model="form" label-width="80px"&gt;
+    &lt;el-form-item label="姓名"&gt;
+      &lt;el-input v-model="form.name" /&gt;
+    &lt;/el-form-item&gt;
+    &lt;el-form-item label="邮箱"&gt;
+      &lt;el-input v-model="form.email" /&gt;
+    &lt;/el-form-item&gt;
+  &lt;/el-form&gt;
+  &lt;template #footer&gt;
+    &lt;el-button @click="visible = false"&gt;取消&lt;/el-button&gt;
+    &lt;el-button type="primary" @click="handleSubmit"&gt;确定&lt;/el-button&gt;
+  &lt;/template&gt;
+&lt;/el-dialog&gt;</code></pre>
+            </div>
+            <div class="help-text">在对话框中使用表单等复杂内容</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">居中布局</div>
+            <div class="prop-name">居中布局</div>
+            <div class="code-block">
+              <pre><code>&lt;el-dialog v-model="visible" title="提示" center&gt;
+  &lt;span&gt;这是一段信息&lt;/span&gt;
+  &lt;template #footer&gt;
+    &lt;el-button @click="visible = false"&gt;取消&lt;/el-button&gt;
+    &lt;el-button type="primary" @click="visible = false"&gt;确定&lt;/el-button&gt;
+  &lt;/template&gt;
+&lt;/el-dialog&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 center 属性可以让对话框居中显示</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">全屏对话框</div>
+            <div class="prop-name">全屏对话框</div>
+            <div class="code-block">
+              <pre><code>&lt;el-dialog v-model="visible" title="全屏对话框" fullscreen&gt;
+  &lt;span&gt;这是全屏对话框的内容&lt;/span&gt;
+&lt;/el-dialog&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 fullscreen 属性可以显示全屏对话框</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">嵌套对话框</div>
+            <div class="prop-name">嵌套对话框</div>
+            <div class="code-block">
+              <pre><code>&lt;el-dialog v-model="outerVisible" title="外层对话框"&gt;
+  &lt;el-dialog v-model="innerVisible" title="内层对话框" append-to-body&gt;
+    &lt;span&gt;内层对话框内容&lt;/span&gt;
+  &lt;/el-dialog&gt;
+  &lt;span&gt;外层对话框内容&lt;/span&gt;
+&lt;/el-dialog&gt;</code></pre>
+            </div>
+            <div class="help-text">嵌套对话框需要设置 append-to-body 属性</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">关闭前确认</div>
+            <div class="prop-name">关闭前确认</div>
+            <div class="code-block">
+              <pre><code>&lt;el-dialog v-model="visible" title="提示" :before-close="handleClose"&gt;
+  &lt;span&gt;这是一段信息&lt;/span&gt;
+&lt;/el-dialog&gt;
+
+const handleClose = (done) => {
+  ElMessageBox.confirm('确认关闭？')
+    .then(() => {
+      done()
+    })
+    .catch(() => {})
+}</code></pre>
+            </div>
+            <div class="help-text">使用 before-close 属性可以在关闭前进行确认</div>
+          </div>
+        </div>
       </div>
     </el-drawer>
   </div>
@@ -383,4 +484,6 @@ const onUI = (name) => ElMessage.info(`触发事件: ${name}`)
 .label-text { font-size: 14px; font-weight: 600; color: #303133; margin-bottom: 4px; }
 .prop-name { font-size: 12px; color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-bottom: 12px; font-family: 'Courier New', monospace; }
 .help-text { font-size: 12px; color: #909399; margin-top: 8px; line-height: 1.4; }
+.code-block { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 12px; margin: 8px 0; }
+.code-block pre { margin: 0; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; }
 </style>

@@ -97,6 +97,132 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-slider v-model="value" /&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+const value = ref(0)
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 设置范围</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-slider 
+  v-model="value" 
+  :min="0" 
+  :max="100" 
+  :step="1" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 范围选择</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-slider 
+  v-model="rangeValue" 
+  :min="0" 
+  :max="100" 
+  range 
+/&gt;
+
+&lt;script setup&gt;
+const rangeValue = ref([20, 80])
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 显示输入框</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-slider 
+  v-model="value" 
+  :min="0" 
+  :max="100" 
+  :show-input="true" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 显示断点</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-slider 
+  v-model="value" 
+  :min="0" 
+  :max="100" 
+  :show-stops="true" 
+  :step="10" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 自定义标记</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-slider 
+  v-model="value" 
+  :min="0" 
+  :max="100" 
+  :marks="marks" 
+/&gt;
+
+&lt;script setup&gt;
+const marks = {
+  0: '0°C',
+  8: '8°C',
+  37: '37°C',
+  50: '50°C',
+  100: '100°C'
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>7. 垂直滑块</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-slider 
+  v-model="value" 
+  :min="0" 
+  :max="100" 
+  vertical 
+  height="200px" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>8. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-slider 
+  v-model="value" 
+  @change="handleChange" 
+  @input="handleInput" 
+/&gt;
+
+&lt;script setup&gt;
+const handleChange = (val) => {
+  console.log('值改变:', val)
+}
+
+const handleInput = (val) => {
+  console.log('输入中:', val)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -439,5 +565,31 @@ const labelHandler = (value) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

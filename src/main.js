@@ -9,10 +9,16 @@ import { createPinia } from 'pinia'
 
 const app = createApp(App)
 const pinia = createPinia()
+
+// 配置应用
 app.use(ElementPlus)
+app.use(pinia) // 先配置 pinia
 app.use(router)
-app.use(pinia)
+
+// 注册所有 Element Plus 图标
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
+
+// 挂载应用
 app.mount('#app')

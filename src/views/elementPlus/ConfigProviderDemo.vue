@@ -163,6 +163,100 @@
           </div>
         </div>
 
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">基础用法</span>
+              <span class="help-text">全局配置的基本使用方式</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-config-provider :locale="locale" :size="size"&gt;
+  &lt;el-button&gt;按钮&lt;/el-button&gt;
+  &lt;el-input placeholder="输入框" /&gt;
+&lt;/el-config-provider&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">国际化配置</span>
+              <span class="help-text">设置组件的语言</span>
+            </div>
+            <div class="code-block">
+              <pre><code>import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
+import en from 'element-plus/dist/locale/en.mjs'
+
+&lt;el-config-provider :locale="zhCn"&gt;
+  &lt;!-- 组件内容 --&gt;
+&lt;/el-config-provider&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">全局尺寸</span>
+              <span class="help-text">设置所有组件的默认尺寸</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-config-provider size="large"&gt;
+  &lt;el-button&gt;大按钮&lt;/el-button&gt;
+  &lt;el-input placeholder="大输入框" /&gt;
+&lt;/el-config-provider&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">按钮配置</span>
+              <span class="help-text">配置按钮的全局属性</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-config-provider :button="{ autoInsertSpace: true }"&gt;
+  &lt;el-button&gt;按钮&lt;/el-button&gt;
+&lt;/el-config-provider&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">消息配置</span>
+              <span class="help-text">配置消息组件的全局属性</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-config-provider :message="{ max: 3 }"&gt;
+  &lt;!-- 组件内容 --&gt;
+&lt;/el-config-provider&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">命名空间</span>
+              <span class="help-text">自定义组件的命名空间</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-config-provider namespace="ep"&gt;
+  &lt;!-- 组件内容 --&gt;
+&lt;/el-config-provider&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">层级配置</span>
+              <span class="help-text">设置组件的默认层级</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-config-provider :z-index="3000"&gt;
+  &lt;!-- 组件内容 --&gt;
+&lt;/el-config-provider&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+
         <!-- 消息配置 -->
         <div class="form-section">
           <div class="section-title">消息配置</div>
@@ -353,5 +447,20 @@ const handleAction = () => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
 }
 </style>

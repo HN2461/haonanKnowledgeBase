@@ -62,6 +62,87 @@
         <el-alert type="info" show-icon :closable="false" style="margin-bottom: 20px;"
           description="提示：1) 进度条支持多种类型和状态；2) 可以自定义颜色和样式；3) 支持动画效果和条纹效果。" />
         
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-progress :percentage="50"&gt;&lt;/el-progress&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 不同状态</h5>
+            <div class="code-block">
+              <pre><code>&lt;!-- 成功状态 --&gt;
+&lt;el-progress :percentage="100" status="success"&gt;&lt;/el-progress&gt;
+
+&lt;!-- 警告状态 --&gt;
+&lt;el-progress :percentage="80" status="warning"&gt;&lt;/el-progress&gt;
+
+&lt;!-- 异常状态 --&gt;
+&lt;el-progress :percentage="30" status="exception"&gt;&lt;/el-progress&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 圆形进度条</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-progress
+  :percentage="50"
+  type="circle"
+  :width="120"
+  :stroke-width="8"
+&gt;&lt;/el-progress&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 仪表盘进度条</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-progress
+  :percentage="75"
+  type="dashboard"
+  :width="120"
+  :gap-degree="90"
+&gt;&lt;/el-progress&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 自定义颜色</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-progress
+  :percentage="60"
+  :color="customColors"
+&gt;&lt;/el-progress&gt;
+
+&lt;script setup&gt;
+const customColors = [
+  { color: '#f56c6c', percentage: 20 },
+  { color: '#e6a23c', percentage: 40 },
+  { color: '#5cb87a', percentage: 60 },
+  { color: '#1989fa', percentage: 80 },
+  { color: '#6f7ad3', percentage: 100 }
+]
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 条纹效果</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-progress
+  :percentage="50"
+  :striped="true"
+  :striped-flow="true"
+&gt;&lt;/el-progress&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="section">
           <h4>基础属性</h4>
@@ -332,4 +413,30 @@ const randomProgress = () => {
 .label-text { font-size: 14px; font-weight: 600; color: #303133; margin-bottom: 4px; }
 .prop-name { font-size: 12px; color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-bottom: 12px; font-family: 'Courier New', monospace; }
 .help-text { font-size: 12px; color: #909399; margin-top: 8px; line-height: 1.4; }
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
+}
 </style>

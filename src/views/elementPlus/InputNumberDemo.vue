@@ -61,6 +61,100 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-input-number v-model="value"&gt;&lt;/el-input-number&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 设置取值范围</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-input-number
+  v-model="value"
+  :min="0"
+  :max="100"
+  :step="1"
+&gt;&lt;/el-input-number&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 精度控制</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-input-number
+  v-model="value"
+  :precision="2"
+  :step="0.1"
+&gt;&lt;/el-input-number&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 不同尺寸</h5>
+            <div class="code-block">
+              <pre><code>&lt;!-- 大尺寸 --&gt;
+&lt;el-input-number v-model="value" size="large"&gt;&lt;/el-input-number&gt;
+
+&lt;!-- 默认尺寸 --&gt;
+&lt;el-input-number v-model="value" size="default"&gt;&lt;/el-input-number&gt;
+
+&lt;!-- 小尺寸 --&gt;
+&lt;el-input-number v-model="value" size="small"&gt;&lt;/el-input-number&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 控制按钮位置</h5>
+            <div class="code-block">
+              <pre><code>&lt;!-- 右侧控制按钮 --&gt;
+&lt;el-input-number
+  v-model="value"
+  :controls="true"
+  controls-position="right"
+&gt;&lt;/el-input-number&gt;
+
+&lt;!-- 左侧控制按钮 --&gt;
+&lt;el-input-number
+  v-model="value"
+  :controls="true"
+  controls-position="left"
+&gt;&lt;/el-input-number&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-input-number
+  v-model="value"
+  @change="handleChange"
+  @blur="handleBlur"
+  @focus="handleFocus"
+&gt;&lt;/el-input-number&gt;
+
+&lt;script setup&gt;
+const handleChange = (val) => {
+  console.log('值改变:', val)
+}
+
+const handleBlur = (event) => {
+  console.log('失去焦点:', event)
+}
+
+const handleFocus = (event) => {
+  console.log('获得焦点:', event)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -336,5 +430,31 @@ const handleFocus = (event) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

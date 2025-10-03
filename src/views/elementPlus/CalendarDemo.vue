@@ -54,6 +54,83 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">基础用法</span>
+              <span class="help-text">日历的基本使用方式</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-calendar v-model="value" /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">日期范围</span>
+              <span class="help-text">设置日历的显示范围</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-calendar
+  v-model="value"
+  :range="['2024-01-01', '2024-12-31']"
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">周起始日</span>
+              <span class="help-text">设置一周的开始日期</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-calendar
+  v-model="value"
+  :first-day-of-week="1"
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">自定义内容</span>
+              <span class="help-text">自定义日期单元格内容</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-calendar v-model="value"&gt;
+  &lt;template #date-cell="{ data }"&gt;
+    &lt;p :class="data.isSelected ? 'is-selected' : ''"&gt;
+      {{ data.day.split('-').slice(1).join('-') }}
+      {{ data.isSelected ? '✔️' : '' }}
+    &lt;/p&gt;
+  &lt;/template&gt;
+&lt;/el-calendar&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">事件处理</span>
+              <span class="help-text">监听日期选择事件</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-calendar
+  v-model="value"
+  @input="handleInput"
+/&gt;
+
+&lt;script setup&gt;
+const handleInput = (val) => {
+  console.log('选择的日期:', val)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -220,5 +297,20 @@ const handleInput = (val) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
 }
 </style>

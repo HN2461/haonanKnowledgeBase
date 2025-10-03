@@ -242,6 +242,108 @@
             <div class="help-text">抽屉内容的样式（JSON格式）</div>
           </div>
         </div>
+        
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="form-item">
+            <div class="label-text">基本用法</div>
+            <div class="prop-name">基本用法</div>
+            <div class="code-block">
+              <pre><code>&lt;el-drawer v-model="visible" title="标题"&gt;
+  &lt;span&gt;抽屉内容&lt;/span&gt;
+&lt;/el-drawer&gt;</code></pre>
+            </div>
+            <div class="help-text">抽屉的基本使用方式</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">不同方向</div>
+            <div class="prop-name">不同方向</div>
+            <div class="code-block">
+              <pre><code>&lt;!-- 从右侧滑出 --&gt;
+&lt;el-drawer v-model="visible" title="标题" direction="rtl"&gt;
+  &lt;span&gt;从右侧滑出&lt;/span&gt;
+&lt;/el-drawer&gt;
+
+&lt;!-- 从左侧滑出 --&gt;
+&lt;el-drawer v-model="visible" title="标题" direction="ltr"&gt;
+  &lt;span&gt;从左侧滑出&lt;/span&gt;
+&lt;/el-drawer&gt;
+
+&lt;!-- 从顶部滑出 --&gt;
+&lt;el-drawer v-model="visible" title="标题" direction="ttb"&gt;
+  &lt;span&gt;从顶部滑出&lt;/span&gt;
+&lt;/el-drawer&gt;
+
+&lt;!-- 从底部滑出 --&gt;
+&lt;el-drawer v-model="visible" title="标题" direction="btt"&gt;
+  &lt;span&gt;从底部滑出&lt;/span&gt;
+&lt;/el-drawer&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 direction 属性可以控制抽屉的滑出方向</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">自定义大小</div>
+            <div class="prop-name">自定义大小</div>
+            <div class="code-block">
+              <pre><code>&lt;el-drawer v-model="visible" title="标题" size="50%"&gt;
+  &lt;span&gt;抽屉宽度为50%&lt;/span&gt;
+&lt;/el-drawer&gt;
+
+&lt;el-drawer v-model="visible" title="标题" size="400px"&gt;
+  &lt;span&gt;抽屉宽度为400px&lt;/span&gt;
+&lt;/el-drawer&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 size 属性可以自定义抽屉的大小</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">无遮罩</div>
+            <div class="prop-name">无遮罩</div>
+            <div class="code-block">
+              <pre><code>&lt;el-drawer v-model="visible" title="标题" :modal="false"&gt;
+  &lt;span&gt;无遮罩的抽屉&lt;/span&gt;
+&lt;/el-drawer&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 :modal="false" 可以隐藏遮罩层</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">自定义头部</div>
+            <div class="prop-name">自定义头部</div>
+            <div class="code-block">
+              <pre><code>&lt;el-drawer v-model="visible" :with-header="false"&gt;
+  &lt;template #header&gt;
+    &lt;h4&gt;自定义头部&lt;/h4&gt;
+  &lt;/template&gt;
+  &lt;span&gt;抽屉内容&lt;/span&gt;
+&lt;/el-drawer&gt;</code></pre>
+            </div>
+            <div class="help-text">使用 header 插槽可以自定义抽屉头部</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">关闭前确认</div>
+            <div class="prop-name">关闭前确认</div>
+            <div class="code-block">
+              <pre><code>&lt;el-drawer v-model="visible" title="标题" :before-close="handleClose"&gt;
+  &lt;span&gt;抽屉内容&lt;/span&gt;
+&lt;/el-drawer&gt;
+
+const handleClose = (done) => {
+  ElMessageBox.confirm('确认关闭？')
+    .then(() => {
+      done()
+    })
+    .catch(() => {})
+}</code></pre>
+            </div>
+            <div class="help-text">使用 before-close 属性可以在关闭前进行确认</div>
+          </div>
+        </div>
       </div>
     </el-drawer>
   </div>
@@ -322,4 +424,6 @@ const onClosed = () => {
 .label-text { font-size: 14px; font-weight: 600; color: #303133; margin-bottom: 4px; }
 .prop-name { font-size: 12px; color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-bottom: 12px; font-family: 'Courier New', monospace; }
 .help-text { font-size: 12px; color: #909399; margin-top: 8px; line-height: 1.4; }
+.code-block { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 12px; margin: 8px 0; }
+.code-block pre { margin: 0; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; }
 </style>

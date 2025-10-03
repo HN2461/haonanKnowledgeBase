@@ -85,6 +85,80 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-pagination
+  :current-page="currentPage"
+  :page-size="pageSize"
+  :total="total"
+  @current-change="handleCurrentChange"
+  @size-change="handleSizeChange"
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 简单分页</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-pagination
+  :current-page="currentPage"
+  :total="50"
+  layout="prev, pager, next"
+  @current-change="handleCurrentChange"
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 完整功能分页</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-pagination
+  :current-page="currentPage"
+  :page-size="pageSize"
+  :page-sizes="[10, 20, 50, 100]"
+  :total="total"
+  layout="total, sizes, prev, pager, next, jumper"
+  :background="true"
+  @current-change="handleCurrentChange"
+  @size-change="handleSizeChange"
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 小型分页</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-pagination
+  :current-page="currentPage"
+  :total="50"
+  :small="true"
+  layout="prev, pager, next"
+  @current-change="handleCurrentChange"
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>const handleCurrentChange = (val) => {
+  console.log('当前页改变:', val)
+  // 处理页码变化
+}
+
+const handleSizeChange = (val) => {
+  console.log('每页条数改变:', val)
+  // 处理每页条数变化
+}</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -369,5 +443,31 @@ const removePageSize = () => {
   flex-wrap: wrap;
   gap: 10px;
   align-items: center;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

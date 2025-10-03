@@ -44,7 +44,7 @@
           <div class="image-group">
             <div class="image-item">
               <el-image
-                src="https://fuss10.elemecdn.com/e/5d/4a1a3c305c64bed9a4ba3c43c43f7jpeg.jpeg"
+                src="https://picsum.photos/100/100?random=9"
                 fit="fill"
                 style="width: 100px; height: 100px;"
               />
@@ -52,7 +52,7 @@
             </div>
             <div class="image-item">
               <el-image
-                src="https://fuss10.elemecdn.com/e/5d/4a1a3c305c64bed9a4ba3c43c43f7jpeg.jpeg"
+                src="https://picsum.photos/100/100?random=10"
                 fit="contain"
                 style="width: 100px; height: 100px;"
               />
@@ -60,7 +60,7 @@
             </div>
             <div class="image-item">
               <el-image
-                src="https://fuss10.elemecdn.com/e/5d/4a1a3c305c64bed9a4ba3c43c43f7jpeg.jpeg"
+                src="https://picsum.photos/100/100?random=11"
                 fit="cover"
                 style="width: 100px; height: 100px;"
               />
@@ -68,7 +68,7 @@
             </div>
             <div class="image-item">
               <el-image
-                src="https://fuss10.elemecdn.com/e/5d/4a1a3c305c64bed9a4ba3c43c43f7jpeg.jpeg"
+                src="https://picsum.photos/100/100?random=12"
                 fit="none"
                 style="width: 100px; height: 100px;"
               />
@@ -76,7 +76,7 @@
             </div>
             <div class="image-item">
               <el-image
-                src="https://fuss10.elemecdn.com/e/5d/4a1a3c305c64bed9a4ba3c43c43f7jpeg.jpeg"
+                src="https://picsum.photos/100/100?random=13"
                 fit="scale-down"
                 style="width: 100px; height: 100px;"
               />
@@ -120,6 +120,133 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-image
+  src="https://example.com/image.jpg"
+  alt="图片描述"
+&gt;&lt;/el-image&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 不同适应方式</h5>
+            <div class="code-block">
+              <pre><code>&lt;!-- 填充 --&gt;
+&lt;el-image src="image.jpg" fit="fill"&gt;&lt;/el-image&gt;
+
+&lt;!-- 包含 --&gt;
+&lt;el-image src="image.jpg" fit="contain"&gt;&lt;/el-image&gt;
+
+&lt;!-- 覆盖 --&gt;
+&lt;el-image src="image.jpg" fit="cover"&gt;&lt;/el-image&gt;
+
+&lt;!-- 原始尺寸 --&gt;
+&lt;el-image src="image.jpg" fit="none"&gt;&lt;/el-image&gt;
+
+&lt;!-- 缩放 --&gt;
+&lt;el-image src="image.jpg" fit="scale-down"&gt;&lt;/el-image&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 懒加载</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-image
+  src="https://example.com/image.jpg"
+  :lazy="true"
+  :scroll-container="scrollContainer"
+&gt;&lt;/el-image&gt;
+
+&lt;script setup&gt;
+const scrollContainer = ref(null)
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 图片预览</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-image
+  src="https://example.com/image1.jpg"
+  :preview-src-list="previewList"
+  :initial-index="0"
+&gt;&lt;/el-image&gt;
+
+&lt;script setup&gt;
+const previewList = [
+  'https://example.com/image1.jpg',
+  'https://example.com/image2.jpg',
+  'https://example.com/image3.jpg'
+]
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 自定义占位符</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-image
+  src="https://example.com/image.jpg"
+&gt;
+  &lt;template #placeholder&gt;
+    &lt;div class="image-placeholder"&gt;
+      &lt;el-icon&gt;&lt;Loading /&gt;&lt;/el-icon&gt;
+      &lt;span&gt;加载中...&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+  &lt;template #error&gt;
+    &lt;div class="image-error"&gt;
+      &lt;el-icon&gt;&lt;Picture /&gt;&lt;/el-icon&gt;
+      &lt;span&gt;加载失败&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/template&gt;
+&lt;/el-image&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-image
+  src="https://example.com/image.jpg"
+  @load="handleLoad"
+  @error="handleError"
+  @switch="handleSwitch"
+  @close="handleClose"
+  @show="handleShow"
+&gt;&lt;/el-image&gt;
+
+&lt;script setup&gt;
+const handleLoad = () => {
+  console.log('图片加载成功')
+}
+
+const handleError = () => {
+  console.log('图片加载失败')
+}
+
+const handleSwitch = (index) => {
+  console.log('切换到图片:', index)
+}
+
+const handleClose = () => {
+  console.log('关闭预览')
+}
+
+const handleShow = () => {
+  console.log('显示预览')
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -284,16 +411,16 @@ const showSettings = ref(false)
 
 // 配置对象
 const cfg = reactive({
-  src: 'https://fuss10.elemecdn.com/e/5d/4a1a3c305c64bed9a4ba3c43c43f7jpeg.jpeg',
+  src: 'https://picsum.photos/400/300?random=1',
   fit: 'cover',
   alt: '图片',
   referrerPolicy: 'strict-origin-when-cross-origin',
   lazy: false,
   scrollContainer: '',
   previewSrcList: [
-    'https://fuss10.elemecdn.com/e/5d/4a1a3c305c64bed9a4ba3c43c43f7jpeg.jpeg',
-    'https://fuss10.elemecdn.com/a/3f/3302e58f9a607d92088f3f9c6b0d8jpeg.jpeg',
-    'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg'
+    'https://picsum.photos/400/300?random=1',
+    'https://picsum.photos/400/300?random=2',
+    'https://picsum.photos/400/300?random=3'
   ],
   zIndex: 2000,
   initialIndex: 0,
@@ -306,11 +433,11 @@ const cfg = reactive({
 
 // 懒加载图片数据
 const lazyImages = ref([
-  { src: 'https://fuss10.elemecdn.com/e/5d/4a1a3c305c64bed9a4ba3c43c43f7jpeg.jpeg' },
-  { src: 'https://fuss10.elemecdn.com/a/3f/3302e58f9a607d92088f3f9c6b0d8jpeg.jpeg' },
-  { src: 'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg' },
-  { src: 'https://fuss10.elemecdn.com/0/6c/e75da1e244ba5e1c6c8e7a2e8e5a8jpeg.jpeg' },
-  { src: 'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdejpeg.jpeg' }
+  { src: 'https://picsum.photos/200/200?random=4' },
+  { src: 'https://picsum.photos/200/200?random=5' },
+  { src: 'https://picsum.photos/200/200?random=6' },
+  { src: 'https://picsum.photos/200/200?random=7' },
+  { src: 'https://picsum.photos/200/200?random=8' }
 ])
 
 // 事件处理
@@ -479,5 +606,31 @@ const removePreviewSrc = () => {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

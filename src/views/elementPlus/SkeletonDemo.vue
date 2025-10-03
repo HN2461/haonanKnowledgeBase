@@ -112,6 +112,107 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-skeleton :rows="3" animated /&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 自定义模板</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-skeleton :rows="0" animated&gt;
+  &lt;template #template&gt;
+    &lt;el-skeleton-item variant="h1" style="width: 40%" /&gt;
+    &lt;el-skeleton-item variant="text" style="width: 100%" /&gt;
+    &lt;el-skeleton-item variant="text" style="width: 80%" /&gt;
+    &lt;el-skeleton-item variant="text" style="width: 60%" /&gt;
+  &lt;/template&gt;
+  &lt;div&gt;真实内容&lt;/div&gt;
+&lt;/el-skeleton&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 不同变体</h5>
+            <div class="code-block">
+              <pre><code>&lt;!-- 文本 --&gt;
+&lt;el-skeleton-item variant="text" /&gt;
+
+&lt;!-- 标题 --&gt;
+&lt;el-skeleton-item variant="h1" /&gt;
+&lt;el-skeleton-item variant="h3" /&gt;
+
+&lt;!-- 头像 --&gt;
+&lt;el-skeleton-item variant="circle" style="width: 60px; height: 60px;" /&gt;
+
+&lt;!-- 按钮 --&gt;
+&lt;el-skeleton-item variant="button" style="width: 100px;" /&gt;
+
+&lt;!-- 图片 --&gt;
+&lt;el-skeleton-item variant="image" style="width: 200px; height: 120px;" /&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 加载状态控制</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-skeleton :loading="loading" :rows="3" animated&gt;
+  &lt;div&gt;加载完成后的内容&lt;/div&gt;
+&lt;/el-skeleton&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+
+const loading = ref(true)
+
+// 模拟数据加载
+setTimeout(() => {
+  loading.value = false
+}, 2000)
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 节流控制</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-skeleton 
+  :loading="loading" 
+  :throttle="500"
+  :rows="3" 
+  animated
+&gt;
+  &lt;div&gt;内容&lt;/div&gt;
+&lt;/el-skeleton&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 复杂布局示例</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-skeleton :loading="loading" :rows="0" animated&gt;
+  &lt;template #template&gt;
+    &lt;div style="display: flex; align-items: center; margin-bottom: 16px;"&gt;
+      &lt;el-skeleton-item variant="circle" style="width: 40px; height: 40px; margin-right: 12px;" /&gt;
+      &lt;div style="flex: 1;"&gt;
+        &lt;el-skeleton-item variant="text" style="width: 60%; margin-bottom: 8px;" /&gt;
+        &lt;el-skeleton-item variant="text" style="width: 40%;" /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;el-skeleton-item variant="image" style="width: 100%; height: 200px;" /&gt;
+  &lt;/template&gt;
+  &lt;div&gt;真实内容&lt;/div&gt;
+&lt;/el-skeleton&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -326,5 +427,31 @@ const handleAction = () => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

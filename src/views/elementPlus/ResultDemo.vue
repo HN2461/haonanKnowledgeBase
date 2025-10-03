@@ -93,6 +93,79 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-result
+  icon="success"
+  title="操作成功"
+  sub-title="请根据提示进行操作"
+&gt;
+  &lt;template #extra&gt;
+    &lt;el-button type="primary"&gt;确定&lt;/el-button&gt;
+  &lt;/template&gt;
+&lt;/el-result&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 不同状态</h5>
+            <div class="code-block">
+              <pre><code>&lt;!-- 成功状态 --&gt;
+&lt;el-result icon="success" title="成功提示" sub-title="操作成功"&gt;&lt;/el-result&gt;
+
+&lt;!-- 警告状态 --&gt;
+&lt;el-result icon="warning" title="警告提示" sub-title="请注意相关事项"&gt;&lt;/el-result&gt;
+
+&lt;!-- 错误状态 --&gt;
+&lt;el-result icon="error" title="错误提示" sub-title="操作失败，请重试"&gt;&lt;/el-result&gt;
+
+&lt;!-- 信息状态 --&gt;
+&lt;el-result icon="info" title="信息提示" sub-title="相关信息说明"&gt;&lt;/el-result&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 自定义操作按钮</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-result
+  icon="success"
+  title="操作成功"
+  sub-title="请根据提示进行操作"
+&gt;
+  &lt;template #extra&gt;
+    &lt;el-button type="primary"&gt;主要操作&lt;/el-button&gt;
+    &lt;el-button&gt;次要操作&lt;/el-button&gt;
+    &lt;el-button type="info"&gt;取消&lt;/el-button&gt;
+  &lt;/template&gt;
+&lt;/el-result&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 自定义图标</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-result
+  :icon="Document"
+  title="自定义图标"
+  sub-title="使用自定义图标的结果页面"
+&gt;
+  &lt;template #extra&gt;
+    &lt;el-button type="primary"&gt;确定&lt;/el-button&gt;
+  &lt;/template&gt;
+&lt;/el-result&gt;
+
+&lt;script setup&gt;
+import { Document } from '@element-plus/icons-vue'
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -270,5 +343,31 @@ const handleSecondary = () => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

@@ -146,6 +146,81 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-divider&gt;&lt;/el-divider&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 带文字的分割线</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-divider&gt;分割线&lt;/el-divider&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 文字位置</h5>
+            <div class="code-block">
+              <pre><code>&lt;!-- 左对齐 --&gt;
+&lt;el-divider content-position="left"&gt;左对齐&lt;/el-divider&gt;
+
+&lt;!-- 居中 --&gt;
+&lt;el-divider content-position="center"&gt;居中&lt;/el-divider&gt;
+
+&lt;!-- 右对齐 --&gt;
+&lt;el-divider content-position="right"&gt;右对齐&lt;/el-divider&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 垂直分割线</h5>
+            <div class="code-block">
+              <pre><code>&lt;div class="vertical-content"&gt;
+  &lt;span&gt;左侧内容&lt;/span&gt;
+  &lt;el-divider direction="vertical" /&gt;
+  &lt;span&gt;右侧内容&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 带图标的分割线</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-divider&gt;
+  &lt;el-icon class="divider-icon"&gt;
+    &lt;Star /&gt;
+  &lt;/el-icon&gt;
+  带图标
+&lt;/el-divider&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 自定义样式</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-divider
+  border-style="dashed"
+  content-position="center"
+&gt;
+  虚线分割线
+&lt;/el-divider&gt;
+
+&lt;style&gt;
+.custom-divider {
+  border-color: #409eff;
+  color: #409eff;
+}
+&lt;/style&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -371,5 +446,31 @@ const handleAction = () => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

@@ -188,6 +188,134 @@
           </div>
         </div>
 
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">基础用法</span>
+              <span class="help-text">多选框的基本使用方式</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-checkbox-group v-model="value"&gt;
+  &lt;el-checkbox label="option1"&gt;选项1&lt;/el-checkbox&gt;
+  &lt;el-checkbox label="option2"&gt;选项2&lt;/el-checkbox&gt;
+  &lt;el-checkbox label="option3"&gt;选项3&lt;/el-checkbox&gt;
+&lt;/el-checkbox-group&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">多选框按钮</span>
+              <span class="help-text">使用多选框按钮样式</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-checkbox-group v-model="value"&gt;
+  &lt;el-checkbox-button label="button1"&gt;按钮1&lt;/el-checkbox-button&gt;
+  &lt;el-checkbox-button label="button2"&gt;按钮2&lt;/el-checkbox-button&gt;
+  &lt;el-checkbox-button label="button3"&gt;按钮3&lt;/el-checkbox-button&gt;
+&lt;/el-checkbox-group&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">禁用状态</span>
+              <span class="help-text">设置多选框为禁用状态</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-checkbox-group v-model="value" disabled&gt;
+  &lt;el-checkbox label="option1"&gt;选项1&lt;/el-checkbox&gt;
+  &lt;el-checkbox label="option2"&gt;选项2&lt;/el-checkbox&gt;
+&lt;/el-checkbox-group&gt;
+
+&lt;!-- 或者单个禁用 --&gt;
+&lt;el-checkbox label="option3" disabled&gt;选项3&lt;/el-checkbox&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">边框样式</span>
+              <span class="help-text">为多选框添加边框</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-checkbox-group v-model="value"&gt;
+  &lt;el-checkbox label="option1" border&gt;选项1&lt;/el-checkbox&gt;
+  &lt;el-checkbox label="option2" border&gt;选项2&lt;/el-checkbox&gt;
+&lt;/el-checkbox-group&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">全选/半选</span>
+              <span class="help-text">实现全选和半选功能</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-checkbox
+  v-model="checkAll"
+  :indeterminate="isIndeterminate"
+  @change="handleCheckAllChange"
+&gt;
+  全选
+&lt;/el-checkbox&gt;
+
+&lt;el-checkbox-group
+  v-model="checkedCities"
+  @change="handleCheckedCitiesChange"
+&gt;
+  &lt;el-checkbox
+    v-for="city in cities"
+    :key="city"
+    :label="city"
+  &gt;
+    {{ city }}
+  &lt;/el-checkbox&gt;
+&lt;/el-checkbox-group&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">不同尺寸</span>
+              <span class="help-text">设置多选框的尺寸</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-checkbox-group v-model="value" size="large"&gt;
+  &lt;el-checkbox label="option1"&gt;大尺寸&lt;/el-checkbox&gt;
+  &lt;el-checkbox label="option2"&gt;大尺寸&lt;/el-checkbox&gt;
+&lt;/el-checkbox-group&gt;
+
+&lt;el-checkbox-group v-model="value" size="small"&gt;
+  &lt;el-checkbox label="option1"&gt;小尺寸&lt;/el-checkbox&gt;
+  &lt;el-checkbox label="option2"&gt;小尺寸&lt;/el-checkbox&gt;
+&lt;/el-checkbox-group&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">事件处理</span>
+              <span class="help-text">监听多选框变化事件</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-checkbox-group v-model="value" @change="handleChange"&gt;
+  &lt;el-checkbox label="option1"&gt;选项1&lt;/el-checkbox&gt;
+  &lt;el-checkbox label="option2"&gt;选项2&lt;/el-checkbox&gt;
+&lt;/el-checkbox-group&gt;
+
+&lt;script setup&gt;
+const handleChange = (value) => {
+  console.log('选中值:', value)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+
         <!-- 选项管理 -->
         <div class="form-section">
           <div class="section-title">选项管理</div>
@@ -418,5 +546,20 @@ const removeOption = (index) => {
   background: #fff;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
+}
+
+.code-block {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
 }
 </style>

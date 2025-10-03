@@ -147,6 +147,111 @@
           </div>
         </div>
 
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">基础用法</span>
+              <span class="help-text">徽章的基本使用方式</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-badge :value="12"&gt;
+  &lt;el-button&gt;消息&lt;/el-button&gt;
+&lt;/el-badge&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">最大值</span>
+              <span class="help-text">设置徽章的最大值</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-badge :value="200" :max="99"&gt;
+  &lt;el-button&gt;消息&lt;/el-button&gt;
+&lt;/el-badge&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">小圆点</span>
+              <span class="help-text">显示小圆点徽章</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-badge is-dot&gt;
+  &lt;el-button&gt;消息&lt;/el-button&gt;
+&lt;/el-badge&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">不同类型</span>
+              <span class="help-text">设置徽章的类型</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-badge :value="12" type="primary"&gt;
+  &lt;el-button&gt;主要&lt;/el-button&gt;
+&lt;/el-badge&gt;
+
+&lt;el-badge :value="12" type="success"&gt;
+  &lt;el-button&gt;成功&lt;/el-button&gt;
+&lt;/el-badge&gt;
+
+&lt;el-badge :value="12" type="warning"&gt;
+  &lt;el-button&gt;警告&lt;/el-button&gt;
+&lt;/el-badge&gt;
+
+&lt;el-badge :value="12" type="danger"&gt;
+  &lt;el-button&gt;危险&lt;/el-button&gt;
+&lt;/el-badge&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">自定义内容</span>
+              <span class="help-text">使用自定义内容作为徽章</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-badge value="new"&gt;
+  &lt;el-button&gt;消息&lt;/el-button&gt;
+&lt;/el-badge&gt;
+
+&lt;el-badge value="hot"&gt;
+  &lt;el-button&gt;消息&lt;/el-button&gt;
+&lt;/el-badge&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">显示零值</span>
+              <span class="help-text">控制是否显示零值</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-badge :value="0" :show-zero="true"&gt;
+  &lt;el-button&gt;消息&lt;/el-button&gt;
+&lt;/el-badge&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">隐藏徽章</span>
+              <span class="help-text">控制徽章的显示和隐藏</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-badge :value="12" :hidden="isHidden"&gt;
+  &lt;el-button&gt;消息&lt;/el-button&gt;
+&lt;/el-badge&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+
         <!-- 状态属性 -->
         <div class="form-section">
           <div class="section-title">状态属性</div>
@@ -311,5 +416,20 @@ const handleError = (event) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
 }
 </style>

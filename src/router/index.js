@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { ElMessage } from 'element-plus'
 
 // 导入页面组件
 import Dashboard from '../views/Dashboard.vue'
 import MenuManagement from '../views/MenuManagement.vue'
 import FileUpload from '../views/FileUpload.vue'
+import NotFound from '../views/NotFound.vue'
 import ButtonDemo from '../views/elementPlus/ButtonDemo.vue'
 import InputDemo from '../views/elementPlus/InputDemo.vue'
 import SelectDemo from '../views/elementPlus/SelectDemo.vue'
@@ -54,6 +56,8 @@ import ConfigProviderDemo from '../views/elementPlus/ConfigProviderDemo.vue'
 import TransferDemo from '../views/elementPlus/TransferDemo.vue'
 import TreeSelectDemo from '../views/elementPlus/TreeSelectDemo.vue'
 import CascaderDemo from '../views/elementPlus/CascaderDemo.vue'
+import AutocompleteDemo from '../views/elementPlus/AutocompleteDemo.vue'
+import CarouselDemo from '../views/elementPlus/CarouselDemo.vue'
 
 const routes = [
   {
@@ -147,12 +151,67 @@ const routes = [
   // 新增表单组件
   { path: '/ep/transfer', name: 'EpTransfer', component: TransferDemo, meta: { title: 'EP-穿梭框', icon: 'Sort' } },
   { path: '/ep/tree-select', name: 'EpTreeSelect', component: TreeSelectDemo, meta: { title: 'EP-树形选择器', icon: 'List' } },
-  { path: '/ep/cascader', name: 'EpCascader', component: CascaderDemo, meta: { title: 'EP-级联选择器', icon: 'Connection' } }
+  { path: '/ep/cascader', name: 'EpCascader', component: CascaderDemo, meta: { title: 'EP-级联选择器', icon: 'Connection' } },
+  { path: '/ep/autocomplete', name: 'EpAutocomplete', component: AutocompleteDemo, meta: { title: 'EP-自动补全', icon: 'Search' } },
+  { path: '/ep/carousel', name: 'EpCarousel', component: CarouselDemo, meta: { title: 'EP-走马灯', icon: 'Picture' } },
+  
+  // 404 页面 - 必须放在所有路由的最后
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFound,
+    meta: {
+      title: '页面未找到'
+    }
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+// 导入用户状态管理
+import { useUserStore } from '../store/userStore'
+
+// 全局路由守卫
+router.beforeEach(async (to, from, next) => {
+  try {
+    // 获取用户store实例
+    const userStore = useUserStore()
+    
+    // 设置页面标题
+    if (to.meta?.title) {
+      document.title = `${to.meta.title} - 浩南知识库演示系统`
+    } else {
+      document.title = '浩南知识库演示系统'
+    }
+    
+    // 延长登录时间（如果已登录）
+    if (userStore.isLoggedIn) {
+      userStore.extendLoginTime()
+    }
+    
+    // 允许访问所有路由，登录检查由 App.vue 处理
+    next()
+    
+  } catch (error) {
+    console.error('路由守卫执行出错:', error)
+    ElMessage.error('页面加载出错，请刷新页面重试')
+    next(false) // 取消导航
+  }
+})
+
+// 全局后置守卫
+router.afterEach((to, from) => {
+  // 记录页面访问日志
+  console.log(`页面跳转: ${from.path} -> ${to.path}`)
+  
+  // 页面切换完成后的处理
+  // 例如：记录用户行为、统计数据等
+  
+  // 滚动到页面顶部
+  window.scrollTo(0, 0)
 })
 
 export default router

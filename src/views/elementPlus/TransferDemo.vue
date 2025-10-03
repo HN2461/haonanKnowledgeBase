@@ -79,6 +79,135 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-transfer v-model="value" :data="data" /&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+
+const value = ref([])
+const data = ref([
+  { key: 1, label: '选项1', disabled: false },
+  { key: 2, label: '选项2', disabled: false },
+  { key: 3, label: '选项3', disabled: false },
+  { key: 4, label: '选项4', disabled: false },
+  { key: 5, label: '选项5', disabled: false }
+])
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 自定义标题</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-transfer 
+  v-model="value" 
+  :data="data" 
+  :titles="['源列表', '目标列表']" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 自定义按钮文本</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-transfer 
+  v-model="value" 
+  :data="data" 
+  :button-texts="['向左移动', '向右移动']" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 可搜索</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-transfer 
+  v-model="value" 
+  :data="data" 
+  filterable 
+  filter-placeholder="请输入搜索内容" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 自定义数据字段</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-transfer 
+  v-model="value" 
+  :data="data" 
+  :props="{
+    key: 'value',
+    label: 'desc',
+    disabled: 'disabled'
+  }" 
+/&gt;
+
+&lt;script setup&gt;
+const data = ref([
+  { value: 1, desc: '选项1', disabled: false },
+  { value: 2, desc: '选项2', disabled: false },
+  { value: 3, desc: '选项3', disabled: false }
+])
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 自定义渲染内容</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-transfer 
+  v-model="value" 
+  :data="data" 
+  :render-content="renderFunc" 
+/&gt;
+
+&lt;script setup&gt;
+const renderFunc = (h, option) => {
+  return h('span', [
+    h('span', option.label),
+    h('el-tag', { size: 'small' }, option.key)
+  ])
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>7. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-transfer 
+  v-model="value" 
+  :data="data" 
+  @change="handleChange" 
+  @left-check-change="handleLeftCheckChange" 
+  @right-check-change="handleRightCheckChange" 
+/&gt;
+
+&lt;script setup&gt;
+const handleChange = (value, direction, movedKeys) => {
+  console.log('值改变:', value, direction, movedKeys)
+}
+
+const handleLeftCheckChange = (value, movedKeys) => {
+  console.log('左侧选中改变:', value, movedKeys)
+}
+
+const handleRightCheckChange = (value, movedKeys) => {
+  console.log('右侧选中改变:', value, movedKeys)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -360,5 +489,31 @@ const removeDataItem = (index) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

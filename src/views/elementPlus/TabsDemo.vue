@@ -94,6 +94,124 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tabs v-model="activeName"&gt;
+  &lt;el-tab-pane label="用户管理" name="first"&gt;用户管理&lt;/el-tab-pane&gt;
+  &lt;el-tab-pane label="配置管理" name="second"&gt;配置管理&lt;/el-tab-pane&gt;
+  &lt;el-tab-pane label="角色管理" name="third"&gt;角色管理&lt;/el-tab-pane&gt;
+&lt;/el-tabs&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 卡片式标签页</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tabs type="card" v-model="activeName"&gt;
+  &lt;el-tab-pane label="用户管理" name="first"&gt;用户管理&lt;/el-tab-pane&gt;
+  &lt;el-tab-pane label="配置管理" name="second"&gt;配置管理&lt;/el-tab-pane&gt;
+  &lt;el-tab-pane label="角色管理" name="third"&gt;角色管理&lt;/el-tab-pane&gt;
+&lt;/el-tabs&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 边框卡片式标签页</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tabs type="border-card" v-model="activeName"&gt;
+  &lt;el-tab-pane label="用户管理" name="first"&gt;用户管理&lt;/el-tab-pane&gt;
+  &lt;el-tab-pane label="配置管理" name="second"&gt;配置管理&lt;/el-tab-pane&gt;
+  &lt;el-tab-pane label="角色管理" name="third"&gt;角色管理&lt;/el-tab-pane&gt;
+&lt;/el-tabs&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 不同位置</h5>
+            <div class="code-block">
+              <pre><code>&lt;!-- 顶部 --&gt;
+&lt;el-tabs tab-position="top" v-model="activeName"&gt;
+  &lt;el-tab-pane label="用户管理" name="first"&gt;用户管理&lt;/el-tab-pane&gt;
+&lt;/el-tabs&gt;
+
+&lt;!-- 右侧 --&gt;
+&lt;el-tabs tab-position="right" v-model="activeName"&gt;
+  &lt;el-tab-pane label="用户管理" name="first"&gt;用户管理&lt;/el-tab-pane&gt;
+&lt;/el-tabs&gt;
+
+&lt;!-- 底部 --&gt;
+&lt;el-tabs tab-position="bottom" v-model="activeName"&gt;
+  &lt;el-tab-pane label="用户管理" name="first"&gt;用户管理&lt;/el-tab-pane&gt;
+&lt;/el-tabs&gt;
+
+&lt;!-- 左侧 --&gt;
+&lt;el-tabs tab-position="left" v-model="activeName"&gt;
+  &lt;el-tab-pane label="用户管理" name="first"&gt;用户管理&lt;/el-tab-pane&gt;
+&lt;/el-tabs&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 可关闭标签页</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tabs
+  v-model="activeName"
+  type="card"
+  closable
+  @tab-remove="handleTabRemove"
+&gt;
+  &lt;el-tab-pane
+    v-for="tab in tabs"
+    :key="tab.name"
+    :label="tab.label"
+    :name="tab.name"
+    :closable="tab.closable"
+  &gt;
+    {{ tab.content }}
+  &lt;/el-tab-pane&gt;
+&lt;/el-tabs&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tabs
+  v-model="activeName"
+  @tab-click="handleTabClick"
+  @tab-remove="handleTabRemove"
+  @tab-add="handleTabAdd"
+  @tab-change="handleTabChange"
+&gt;
+  &lt;el-tab-pane label="用户管理" name="first"&gt;用户管理&lt;/el-tab-pane&gt;
+&lt;/el-tabs&gt;
+
+&lt;script setup&gt;
+const handleTabClick = (tab) => {
+  console.log('标签页点击:', tab)
+}
+
+const handleTabRemove = (name) => {
+  console.log('标签页移除:', name)
+}
+
+const handleTabAdd = () => {
+  console.log('标签页添加')
+}
+
+const handleTabChange = (name) => {
+  console.log('标签页改变:', name)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -427,5 +545,31 @@ const removeTab = (index) => {
   background: #fff;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

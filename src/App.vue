@@ -1,11 +1,18 @@
 <template>
-  <div class="app-container">
+  <!-- 登录页面 - 作为应用入口 -->
+  <Login v-if="!userStore.isLoggedIn" @login-success="handleLoginSuccess" />
+  
+  <!-- 主应用界面 - 登录后显示 -->
+  <div v-else class="app-container">
     <!-- 顶部导航栏 -->
     <el-header class="header">
       <div class="header-left">
-        <el-button type="text" icon="Menu" 
+        <el-button text icon="Menu" 
         @click="menuStore.toggleCollapse" class="collapse-btn" />
-        <h1 class="title">浩南知识库演示系统</h1>
+        <div class="logo-wrapper">
+          <el-icon class="logo-icon" :size="28"><DataAnalysis /></el-icon>
+          <h1 class="title">浩南知识库</h1>
+        </div>
       </div>
 
       <div class="header-center">
@@ -34,29 +41,45 @@
       </div>
 
       <div class="header-right">
-        <el-button icon="Refresh" circle @click="handleRefresh" />
-        <el-button type="primary" @click="router.push('/menu/management')">新增菜单</el-button>
+        <el-tooltip content="刷新页面" placement="bottom">
+          <el-button icon="Refresh" circle @click="handleRefresh" />
+        </el-tooltip>
+        
+        <el-tooltip content="新增菜单" placement="bottom">
+          <el-button icon="Plus" circle @click="router.push('/menu/management')" />
+        </el-tooltip>
+        
         <!-- 消息通知，采用徽章组件 -->
-        <el-badge :value="3" class="notification-badge">
-          <el-button icon="Bell" circle />
-          <!-- 自定义徽章内容 -->
-          <template #content="{value}">
-            <div class="custom-content">
-              <el-icon size="16">
-                <Message />
-              </el-icon>
-              <span>{{ value }}</span>
-            </div>
-          </template>
-        </el-badge>
+        <el-tooltip content="消息通知" placement="bottom">
+          <el-badge :value="3" class="notification-badge">
+            <el-button icon="Bell" circle />
+          </el-badge>
+        </el-tooltip>
+        
         <!-- 用户信息，采用下拉菜单组件 -->
-        <el-dropdown>
-          <el-button icon="User" circle />
+        <el-dropdown @command="handleUserCommand" class="user-dropdown">
+          <div class="user-info">
+            <el-avatar v-if="userStore.userAvatar" :src="userStore.userAvatar" :size="32" />
+            <el-avatar v-else :size="32">
+              <el-icon><User /></el-icon>
+            </el-avatar>
+            <span class="username">{{ userStore.displayName }}</span>
+            <el-icon class="dropdown-icon"><ArrowDown /></el-icon>
+          </div>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>个人中心</el-dropdown-item>
-              <el-dropdown-item>设置</el-dropdown-item>
-              <el-dropdown-item divided>退出登录</el-dropdown-item>
+              <el-dropdown-item command="profile">
+                <el-icon><User /></el-icon>
+                个人中心
+              </el-dropdown-item>
+              <el-dropdown-item command="settings">
+                <el-icon><Setting /></el-icon>
+                设置
+              </el-dropdown-item>
+              <el-dropdown-item divided command="logout">
+                <el-icon><SwitchButton /></el-icon>
+                退出登录
+              </el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -120,10 +143,17 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { ElMessage } from 'element-plus'
+import { 
+  User, 
+  Setting, 
+  SwitchButton 
+} from '@element-plus/icons-vue'
 import { useMenuStore } from './store/menuStore'
+import { useUserStore } from './store/userStore'
 import RecursiveMenu from './components/RecursiveMenu.vue'
 import TabsNavigation from './components/TabsNavigation.vue'
 import Breadcrumb from './components/Breadcrumb.vue'
+import Login from './views/Login.vue'
 import { useRoute, useRouter } from 'vue-router'
 import appRouter from './router/index.js'
 
@@ -131,6 +161,9 @@ import appRouter from './router/index.js'
 
 // 使用菜单状态管理
 const menuStore = useMenuStore()
+
+// 使用用户状态管理
+const userStore = useUserStore()
 
 // 搜索框的值
 const searchValue = ref('')
@@ -475,12 +508,73 @@ const handleRefresh = () => {
   location.reload()
 }
 
+// ==================== 用户相关方法 ====================
+
+/**
+ * 处理用户下拉菜单命令
+ * @param {string} command - 命令类型
+ */
+const handleUserCommand = (command) => {
+  switch (command) {
+    case 'profile':
+      // 跳转到个人中心（暂时用消息提示）
+      ElMessage.info('个人中心功能正在开发中...')
+      break
+    case 'settings':
+      // 跳转到设置页面（暂时用消息提示）
+      ElMessage.info('设置功能正在开发中...')
+      break
+    case 'logout':
+      handleLogout()
+      break
+    default:
+      console.warn('未知的用户命令:', command)
+  }
+}
+
+/**
+ * 处理用户退出登录
+ */
+const handleLogout = () => {
+  try {
+    // 调用用户store的退出登录方法
+    userStore.logout()
+    
+    // 关闭所有打开的标签页
+    closeAllTabs()
+    
+    // 重置路由到根路径
+    router.push('/')
+    
+  } catch (error) {
+    console.error('退出登录失败:', error)
+    ElMessage.error('退出登录失败，请刷新页面重试')
+  }
+}
+
+/**
+ * 处理登录成功事件
+ */
+const handleLoginSuccess = () => {
+  // 登录成功后，App.vue 会根据 userStore.isLoggedIn 自动切换到主应用界面
+  // 跳转到仪表板
+  router.push('/dashboard')
+  
+  // 初始化搜索页面数据（因为之前可能还没有初始化）
+  initSearchablePages()
+}
+
 
 
 // 组件挂载时初始化
 onMounted(() => {
-  // 初始化搜索页面数据
-  initSearchablePages()
+  // 初始化用户状态（从本地存储恢复登录状态）
+  userStore.initUserStore()
+  
+  // 只有在已登录时才初始化搜索页面数据
+  if (userStore.isLoggedIn) {
+    initSearchablePages()
+  }
   
   // 组件挂载时的其他初始化操作
   
@@ -547,54 +641,80 @@ const handleMenuItemIconError = (iconName) => {
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  height: 70px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  height: 60px;
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
+  flex-shrink: 0;
 }
 
 .collapse-btn {
-  font-size: 30px;
+  font-size: 24px;
   padding: 8px;
-  padding-left: 20px;
+  color: #606266 !important;
   border-radius: 8px;
   transition: all 0.3s ease;
 }
 
 .collapse-btn:hover {
   background: #f5f7fa;
+  color: #409eff !important;
+  transform: scale(1.05);
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
   color: #409eff;
 }
 
 .title {
   margin: 0;
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   color: #303133;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .header-center {
   flex: 1;
-  max-width: 500px;
-  margin: 0 40px;
+  max-width: 600px;
+  margin: 0 32px;
 }
 
 .search-input {
-  height: 40px;
   width: 100%;
 }
 
-.search-input .el-input__inner {
-  height: 40px;
-  border-radius: 20px;
-  border: 1px solid #dcdfe6;
-  padding-left: 40px;
+.search-input :deep(.el-input__wrapper) {
+  background: #f5f7fa;
+  border-radius: 24px;
+  box-shadow: none;
+  padding: 8px 16px;
+  transition: all 0.3s ease;
+}
+
+.search-input :deep(.el-input__wrapper:hover) {
+  background: #e8ecf0;
+}
+
+.search-input :deep(.el-input__wrapper.is-focus) {
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2);
+}
+
+.search-input :deep(.el-input__inner) {
   font-size: 14px;
+  color: #303133;
 }
 
 /* 搜索建议样式 */
@@ -642,22 +762,27 @@ const handleMenuItemIconError = (iconName) => {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding-right: 20px;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
 .header-right .el-button {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  font-size: 18px;
+  font-size: 16px;
+  background: #f5f7fa;
+  border: 1px solid #e4e7ed;
+  color: #606266 !important;
   transition: all 0.3s ease;
 }
 
 .header-right .el-button:hover {
-  background: #f5f7fa;
-  color: #409eff;
+  background: #409eff;
+  border-color: #409eff;
+  color: #fff !important;
   transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3);
 }
 
 .notification-badge {
@@ -670,6 +795,50 @@ const handleMenuItemIconError = (iconName) => {
   line-height: 18px;
   min-width: 18px;
   padding: 0 6px;
+  background: #f56c6c;
+  border: 2px solid #fff;
+}
+
+.user-dropdown {
+  margin-left: 4px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-radius: 24px;
+  background: #f5f7fa;
+  border: 1px solid #e4e7ed;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.user-info:hover {
+  background: #ecf5ff;
+  border-color: #409eff;
+  box-shadow: 0 2px 8px rgba(64, 158, 255, 0.2);
+}
+
+.user-info .el-avatar {
+  border: 2px solid #e4e7ed;
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 500;
+  color: #303133;
+  white-space: nowrap;
+}
+
+.dropdown-icon {
+  color: #909399;
+  font-size: 12px;
+  white-space: nowrap;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .main-container {
@@ -726,17 +895,60 @@ const handleMenuItemIconError = (iconName) => {
 .sidebar .el-menu.el-menu--collapse .el-sub-menu__title span,
 .sidebar .el-menu.el-menu--collapse .el-menu-item span {
   display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }
+
+/* 更具体的选择器确保样式生效 */
+.sidebar .el-menu.el-menu--collapse .el-sub-menu .el-sub-menu__title span,
+.sidebar .el-menu.el-menu--collapse .el-menu-item span {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* 针对递归组件中的span元素 */
+.sidebar .el-menu.el-menu--collapse [data-v-3341fe46] span {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
 .sidebar .el-menu.el-menu--collapse .el-sub-menu__title,
 .sidebar .el-menu.el-menu--collapse .el-menu-item {
   overflow: hidden !important;
   padding-left: 20px !important;
   padding-right: 20px !important;
   text-align: center;
+  justify-content: center !important;
+  display: flex !important;
+  align-items: center !important;
 }
+
 .sidebar .el-menu.el-menu--collapse .el-sub-menu__title .el-sub-menu__icon-arrow {
   display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
 }
+
+/* 确保折叠状态下只显示图标 */
+.sidebar .el-menu.el-menu--collapse .el-sub-menu__title .el-icon,
+.sidebar .el-menu.el-menu--collapse .el-menu-item .el-icon {
+  margin-right: 0 !important;
+  flex-shrink: 0 !important;
+}
+
 /* 进一步隐藏任何残留文字节点 */
 .sidebar .el-menu.el-menu--collapse .el-sub-menu__title,
 .sidebar .el-menu.el-menu--collapse .el-menu-item {
@@ -749,9 +961,16 @@ const handleMenuItemIconError = (iconName) => {
   margin: 0 !important;
 }
 /* 确保折叠状态下完全隐藏文字 */
-.sidebar .el-menu.el-menu--collapse .el-sub-menu__title *:not(.el-icon),
-.sidebar .el-menu.el-menu--collapse .el-menu-item *:not(.el-icon) {
+.sidebar .el-menu.el-menu--collapse .el-sub-menu__title *:not(.el-icon):not(svg):not(i),
+.sidebar .el-menu.el-menu--collapse .el-menu-item *:not(.el-icon):not(svg):not(i) {
   display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  max-width: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
 }
 
 /* 自定义滚动条样式 */
@@ -1039,5 +1258,54 @@ const handleMenuItemIconError = (iconName) => {
   .content-row .el-col {
     margin-bottom: 20px;
   }
+}
+</style>
+
+<!-- 全局样式：用于菜单收缩时隐藏文字 -->
+<style>
+/* 最高优先级：强制隐藏菜单收缩时的文字 */
+.el-menu--collapse .el-sub-menu__title span,
+.el-menu--collapse .el-menu-item span {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  max-width: 0 !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -99999px !important;
+  pointer-events: none !important;
+}
+
+/* 隐藏箭头图标 */
+.el-menu--collapse .el-sub-menu__title .el-sub-menu__icon-arrow,
+.el-menu--collapse .el-sub-menu__icon-arrow {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -99999px !important;
+}
+
+/* 确保菜单项居中显示图标 */
+.el-menu--collapse .el-sub-menu__title,
+.el-menu--collapse .el-menu-item {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  justify-content: center !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* 设置图标样式 */
+.el-menu--collapse .el-sub-menu__title .el-icon,
+.el-menu--collapse .el-menu-item .el-icon {
+  margin: 0 auto !important;
+  font-size: 18px !important;
 }
 </style>

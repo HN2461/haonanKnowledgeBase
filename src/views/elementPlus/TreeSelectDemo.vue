@@ -99,6 +99,172 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree-select v-model="value" :data="data" /&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+
+const value = ref('')
+const data = ref([
+  {
+    value: '1',
+    label: '一级 1',
+    children: [
+      { value: '1-1', label: '二级 1-1' },
+      { value: '1-2', label: '二级 1-2' }
+    ]
+  },
+  {
+    value: '2',
+    label: '一级 2',
+    children: [
+      { value: '2-1', label: '二级 2-1' },
+      { value: '2-2', label: '二级 2-2' }
+    ]
+  }
+])
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 多选模式</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree-select 
+  v-model="value" 
+  :data="data" 
+  multiple 
+  :collapse-tags="true" 
+  :max-collapse-tags="3" 
+/&gt;
+
+&lt;script setup&gt;
+const value = ref([])
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 显示复选框</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree-select 
+  v-model="value" 
+  :data="data" 
+  show-checkbox 
+  check-strictly 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 可清空</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree-select 
+  v-model="value" 
+  :data="data" 
+  clearable 
+  placeholder="请选择" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 自定义数据字段</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree-select 
+  v-model="value" 
+  :data="data" 
+  :props="{
+    value: 'id',
+    label: 'name',
+    children: 'children'
+  }" 
+/&gt;
+
+&lt;script setup&gt;
+const data = ref([
+  {
+    id: 1,
+    name: '一级 1',
+    children: [
+      { id: 11, name: '二级 1-1' },
+      { id: 12, name: '二级 1-2' }
+    ]
+  }
+])
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 懒加载</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree-select 
+  v-model="value" 
+  :data="data" 
+  :load="loadNode" 
+  lazy 
+/&gt;
+
+&lt;script setup&gt;
+const loadNode = (node, resolve) => {
+  if (node.level === 0) {
+    return resolve([{ value: '1', label: 'region1' }])
+  }
+  if (node.level > 3) {
+    return resolve([])
+  }
+  setTimeout(() => {
+    resolve([
+      { value: 'leaf', label: 'leaf' },
+      { value: 'zone', label: 'zone' }
+    ])
+  }, 1000)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>7. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree-select 
+  v-model="value" 
+  :data="data" 
+  @change="handleChange" 
+  @visible-change="handleVisibleChange" 
+  @remove-tag="handleRemoveTag" 
+  @clear="handleClear" 
+/&gt;
+
+&lt;script setup&gt;
+const handleChange = (value) => {
+  console.log('值改变:', value)
+}
+
+const handleVisibleChange = (visible) => {
+  console.log('显示状态改变:', visible)
+}
+
+const handleRemoveTag = (value) => {
+  console.log('移除标签:', value)
+}
+
+const handleClear = () => {
+  console.log('清空')
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -450,5 +616,31 @@ const removeDataItem = (index) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

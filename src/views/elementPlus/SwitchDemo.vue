@@ -177,6 +177,141 @@
           </div>
         </div>
 
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">基础用法</span>
+              <span class="help-text">开关的基本使用方式</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-switch v-model="value" /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">带文字描述</span>
+              <span class="help-text">为开关添加文字描述</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-switch
+  v-model="value"
+  active-text="开启"
+  inactive-text="关闭"
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">禁用状态</span>
+              <span class="help-text">设置开关为禁用状态</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-switch v-model="value" disabled /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">加载状态</span>
+              <span class="help-text">显示加载中的开关</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-switch v-model="value" loading /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">自定义颜色</span>
+              <span class="help-text">自定义开关的颜色</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-switch
+  v-model="value"
+  active-color="#13ce66"
+  inactive-color="#ff4949"
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">不同尺寸</span>
+              <span class="help-text">设置开关的尺寸</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-switch v-model="value" size="large" /&gt;
+&lt;el-switch v-model="value" size="default" /&gt;
+&lt;el-switch v-model="value" size="small" /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">自定义值</span>
+              <span class="help-text">使用自定义的激活和非激活值</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-switch
+  v-model="value"
+  active-value="on"
+  inactive-value="off"
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">切换前确认</span>
+              <span class="help-text">在切换前进行确认</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-switch
+  v-model="value"
+  :before-change="beforeChange"
+/&gt;
+
+&lt;script setup&gt;
+const beforeChange = () => {
+  return new Promise((resolve) => {
+    // 确认逻辑
+    resolve(true)
+  })
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">事件处理</span>
+              <span class="help-text">监听开关变化事件</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-switch
+  v-model="value"
+  @change="handleChange"
+  @click="handleClick"
+/&gt;
+
+&lt;script setup&gt;
+const handleChange = (value) => {
+  console.log('开关状态:', value)
+}
+
+const handleClick = (event) => {
+  console.log('开关点击:', event)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+
         <!-- 值属性 -->
         <div class="form-section">
           <div class="section-title">值属性</div>
@@ -353,5 +488,20 @@ const beforeChangeHandler = () => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
 }
 </style>

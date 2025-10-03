@@ -95,6 +95,144 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-picker v-model="value" /&gt;
+
+&lt;script setup&gt;
+import { ref } from 'vue'
+const value = ref(new Date())
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 任意时间点</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-picker 
+  v-model="value" 
+  :picker-options="{
+    selectableRange: '18:30:00 - 20:30:00'
+  }" 
+  placeholder="任意时间点" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 时间范围</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-picker 
+  v-model="value" 
+  is-range 
+  range-separator="至" 
+  start-placeholder="开始时间" 
+  end-placeholder="结束时间" 
+/&gt;
+
+&lt;script setup&gt;
+const value = ref([new Date(), new Date()])
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 任意时间范围</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-picker 
+  v-model="value" 
+  is-range 
+  arrow-control 
+  range-separator="至" 
+  start-placeholder="开始时间" 
+  end-placeholder="结束时间" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 自定义格式</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-picker 
+  v-model="value" 
+  format="HH:mm:ss" 
+  value-format="HH:mm:ss" 
+  placeholder="选择时间" 
+/&gt;
+
+&lt;el-time-picker 
+  v-model="value" 
+  format="hh:mm:ss A" 
+  value-format="hh:mm:ss A" 
+  placeholder="选择时间" 
+/&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 禁用时间</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-picker 
+  v-model="value" 
+  :disabled-hours="disabledHours" 
+  :disabled-minutes="disabledMinutes" 
+  :disabled-seconds="disabledSeconds" 
+/&gt;
+
+&lt;script setup&gt;
+const disabledHours = () => {
+  return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+}
+
+const disabledMinutes = (hour) => {
+  if (hour === 14) {
+    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59]
+  }
+  return []
+}
+
+const disabledSeconds = (hour, minute) => {
+  if (hour === 14 && minute === 0) {
+    return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59]
+  }
+  return []
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>7. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-time-picker 
+  v-model="value" 
+  @change="handleChange" 
+  @blur="handleBlur" 
+  @focus="handleFocus" 
+/&gt;
+
+&lt;script setup&gt;
+const handleChange = (value) => {
+  console.log('时间改变:', value)
+}
+
+const handleBlur = (event) => {
+  console.log('失去焦点:', event)
+}
+
+const handleFocus = (event) => {
+  console.log('获得焦点:', event)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -493,5 +631,31 @@ const disabledSecondsHandler = (hour, minute) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

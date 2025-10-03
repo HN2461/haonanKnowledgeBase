@@ -101,6 +101,75 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-backtop&gt;&lt;/el-backtop&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 自定义触发高度</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-backtop :visibility-height="200"&gt;&lt;/el-backtop&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 自定义位置</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-backtop
+  :right="40"
+  :bottom="40"
+&gt;&lt;/el-backtop&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 自定义内容</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-backtop&gt;
+  &lt;div class="custom-backtop"&gt;
+    &lt;el-icon&gt;&lt;ArrowUp /&gt;&lt;/el-icon&gt;
+    &lt;span&gt;顶部&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/el-backtop&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 指定容器</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-backtop
+  :target="targetElement"
+  :visibility-height="100"
+&gt;&lt;/el-backtop&gt;
+
+&lt;script setup&gt;
+const targetElement = ref(null)
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-backtop @click="handleClick"&gt;&lt;/el-backtop&gt;
+
+&lt;script setup&gt;
+const handleClick = () => {
+  console.log('点击了回到顶部按钮')
+  ElMessage.success('回到顶部')
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -357,5 +426,31 @@ const handleClick = () => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

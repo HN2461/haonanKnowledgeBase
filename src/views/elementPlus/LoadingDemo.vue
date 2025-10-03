@@ -39,6 +39,62 @@
         <el-alert type="info" show-icon :closable="false" style="margin-bottom: 20px;"
           description="提示：1) Loading 可以用于局部加载和全屏加载；2) 支持自定义加载图标和文本；3) 可以通过服务方式调用。" />
         
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;div v-loading="loading"&gt;
+  加载内容
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 自定义加载文本</h5>
+            <div class="code-block">
+              <pre><code>&lt;div v-loading="loading" element-loading-text="拼命加载中..."&gt;
+  加载内容
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 自定义加载图标</h5>
+            <div class="code-block">
+              <pre><code>&lt;div v-loading="loading" element-loading-spinner="el-icon-loading"&gt;
+  加载内容
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 全屏加载</h5>
+            <div class="code-block">
+              <pre><code>&lt;div v-loading="loading" element-loading-fullscreen&gt;
+  加载内容
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 服务方式调用</h5>
+            <div class="code-block">
+              <pre><code>// 开启全屏加载
+const loading = ElLoading.service({
+  lock: true,
+  text: 'Loading',
+  background: 'rgba(0, 0, 0, 0.7)'
+})
+
+// 关闭加载
+loading.close()</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="section">
           <h4>基础属性</h4>

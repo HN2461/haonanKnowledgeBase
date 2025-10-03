@@ -336,6 +336,118 @@
             <div class="help-text">下拉框传送的目标元素</div>
           </div>
         </div>
+        
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="form-item">
+            <div class="label-text">基本用法</div>
+            <div class="prop-name">基本用法</div>
+            <div class="code-block">
+              <pre><code>&lt;el-select v-model="value" placeholder="请选择"&gt;
+  &lt;el-option label="选项一" value="1" /&gt;
+  &lt;el-option label="选项二" value="2" /&gt;
+  &lt;el-option label="选项三" value="3" /&gt;
+&lt;/el-select&gt;</code></pre>
+            </div>
+            <div class="help-text">选择器的基本使用方式</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">禁用状态</div>
+            <div class="prop-name">禁用状态</div>
+            <div class="code-block">
+              <pre><code>&lt;el-select v-model="value" placeholder="请选择" disabled&gt;
+  &lt;el-option label="选项一" value="1" /&gt;
+  &lt;el-option label="选项二" value="2" /&gt;
+&lt;/el-select&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 disabled 属性可以禁用选择器</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">可清空</div>
+            <div class="prop-name">可清空</div>
+            <div class="code-block">
+              <pre><code>&lt;el-select v-model="value" placeholder="请选择" clearable&gt;
+  &lt;el-option label="选项一" value="1" /&gt;
+  &lt;el-option label="选项二" value="2" /&gt;
+&lt;/el-select&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 clearable 属性可以显示清除按钮</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">可搜索</div>
+            <div class="prop-name">可搜索</div>
+            <div class="code-block">
+              <pre><code>&lt;el-select v-model="value" placeholder="请选择" filterable&gt;
+  &lt;el-option label="选项一" value="1" /&gt;
+  &lt;el-option label="选项二" value="2" /&gt;
+&lt;/el-select&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 filterable 属性可以搜索选项</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">多选</div>
+            <div class="prop-name">多选</div>
+            <div class="code-block">
+              <pre><code>&lt;el-select v-model="value" placeholder="请选择" multiple&gt;
+  &lt;el-option label="选项一" value="1" /&gt;
+  &lt;el-option label="选项二" value="2" /&gt;
+  &lt;el-option label="选项三" value="3" /&gt;
+&lt;/el-select&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 multiple 属性可以多选</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">折叠标签</div>
+            <div class="prop-name">折叠标签</div>
+            <div class="code-block">
+              <pre><code>&lt;el-select v-model="value" placeholder="请选择" multiple collapse-tags&gt;
+  &lt;el-option label="选项一" value="1" /&gt;
+  &lt;el-option label="选项二" value="2" /&gt;
+  &lt;el-option label="选项三" value="3" /&gt;
+&lt;/el-select&gt;</code></pre>
+            </div>
+            <div class="help-text">多选时设置 collapse-tags 可以折叠标签</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">分组</div>
+            <div class="prop-name">分组</div>
+            <div class="code-block">
+              <pre><code>&lt;el-select v-model="value" placeholder="请选择"&gt;
+  &lt;el-option-group label="热门城市"&gt;
+    &lt;el-option label="上海" value="shanghai" /&gt;
+    &lt;el-option label="北京" value="beijing" /&gt;
+  &lt;/el-option-group&gt;
+  &lt;el-option-group label="其他城市"&gt;
+    &lt;el-option label="广州" value="guangzhou" /&gt;
+    &lt;el-option label="深圳" value="shenzhen" /&gt;
+  &lt;/el-option-group&gt;
+&lt;/el-select&gt;</code></pre>
+            </div>
+            <div class="help-text">使用 el-option-group 可以对选项进行分组</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">自定义选项</div>
+            <div class="prop-name">自定义选项</div>
+            <div class="code-block">
+              <pre><code>&lt;el-select v-model="value" placeholder="请选择"&gt;
+  &lt;el-option label="选项一" value="1"&gt;
+    &lt;span style="float: left"&gt;选项一&lt;/span&gt;
+    &lt;span style="float: right; color: #8492a6; font-size: 13px"&gt;选项一描述&lt;/span&gt;
+  &lt;/el-option&gt;
+&lt;/el-select&gt;</code></pre>
+            </div>
+            <div class="help-text">可以在 el-option 中自定义选项内容</div>
+          </div>
+        </div>
       </div>
     </el-drawer>
   </div>
@@ -465,4 +577,6 @@ const onLog = (name) => console.debug('[SelectDemo]', name)
 .label-text { font-size: 14px; font-weight: 600; color: #303133; margin-bottom: 4px; }
 .prop-name { font-size: 12px; color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-bottom: 12px; font-family: 'Courier New', monospace; }
 .help-text { font-size: 12px; color: #909399; margin-top: 8px; line-height: 1.4; }
+.code-block { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 12px; margin: 8px 0; }
+.code-block pre { margin: 0; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; }
 </style>

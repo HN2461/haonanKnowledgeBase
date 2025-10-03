@@ -289,6 +289,85 @@
             <div class="help-text">文本域行数</div>
           </div>
         </div>
+        
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="form-item">
+            <div class="label-text">基本用法</div>
+            <div class="prop-name">基本用法</div>
+            <div class="code-block">
+              <pre><code>&lt;el-form :model="form" :rules="rules" ref="formRef"&gt;
+  &lt;el-form-item label="姓名" prop="name"&gt;
+    &lt;el-input v-model="form.name" /&gt;
+  &lt;/el-form-item&gt;
+  &lt;el-form-item&gt;
+    &lt;el-button type="primary" @click="submit"&gt;提交&lt;/el-button&gt;
+  &lt;/el-form-item&gt;
+&lt;/el-form&gt;</code></pre>
+            </div>
+            <div class="help-text">表单的基本使用方式，包含数据绑定和验证规则</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">内联表单</div>
+            <div class="prop-name">内联表单</div>
+            <div class="code-block">
+              <pre><code>&lt;el-form :model="form" inline&gt;
+  &lt;el-form-item label="姓名"&gt;
+    &lt;el-input v-model="form.name" /&gt;
+  &lt;/el-form-item&gt;
+  &lt;el-form-item label="年龄"&gt;
+    &lt;el-input v-model="form.age" /&gt;
+  &lt;/el-form-item&gt;
+&lt;/el-form&gt;</code></pre>
+            </div>
+            <div class="help-text">设置 inline 属性可以让表单项水平排列</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">验证规则</div>
+            <div class="prop-name">验证规则</div>
+            <div class="code-block">
+              <pre><code>const rules = {
+  name: [
+    { required: true, message: '请输入姓名', trigger: 'blur' }
+  ],
+  email: [
+    { type: 'email', message: '请输入正确的邮箱格式', trigger: 'blur' }
+  ],
+  age: [
+    { required: true, message: '请输入年龄', trigger: 'blur' },
+    { type: 'number', message: '年龄必须为数字', trigger: 'blur' }
+  ]
+}</code></pre>
+            </div>
+            <div class="help-text">定义表单验证规则，支持多种验证类型</div>
+          </div>
+          
+          <div class="form-item">
+            <div class="label-text">表单方法</div>
+            <div class="prop-name">表单方法</div>
+            <div class="code-block">
+              <pre><code>// 验证整个表单
+formRef.value.validate((valid) => {
+  if (valid) {
+    console.log('验证通过')
+  } else {
+    console.log('验证失败')
+  }
+})
+
+// 重置表单
+formRef.value.resetFields()
+
+// 清除验证
+formRef.value.clearValidate()</code></pre>
+            </div>
+            <div class="help-text">通过 ref 调用表单的方法进行验证、重置等操作</div>
+          </div>
+        </div>
       </div>
     </el-drawer>
   </div>
@@ -415,4 +494,6 @@ const clearValidate = () => {
 .label-text { font-size: 14px; font-weight: 600; color: #303133; margin-bottom: 4px; }
 .prop-name { font-size: 12px; color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-bottom: 12px; font-family: 'Courier New', monospace; }
 .help-text { font-size: 12px; color: #909399; margin-top: 8px; line-height: 1.4; }
+.code-block { background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; padding: 12px; margin: 8px 0; }
+.code-block pre { margin: 0; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.4; }
 </style>

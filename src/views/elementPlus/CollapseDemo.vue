@@ -93,6 +93,99 @@
           </div>
         </div>
 
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">基础用法</span>
+              <span class="help-text">折叠面板的基本使用方式</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-collapse v-model="activeNames"&gt;
+  &lt;el-collapse-item title="一致性 Consistency" name="1"&gt;
+    &lt;div&gt;与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；&lt;/div&gt;
+  &lt;/el-collapse-item&gt;
+  &lt;el-collapse-item title="反馈 Feedback" name="2"&gt;
+    &lt;div&gt;控制反馈：通过界面样式和交互动效让用户可以清晰的感知自己的操作；&lt;/div&gt;
+  &lt;/el-collapse-item&gt;
+&lt;/el-collapse&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">手风琴模式</span>
+              <span class="help-text">每次只能展开一个面板</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-collapse v-model="activeName" accordion&gt;
+  &lt;el-collapse-item title="一致性 Consistency" name="1"&gt;
+    &lt;div&gt;内容1&lt;/div&gt;
+  &lt;/el-collapse-item&gt;
+  &lt;el-collapse-item title="反馈 Feedback" name="2"&gt;
+    &lt;div&gt;内容2&lt;/div&gt;
+  &lt;/el-collapse-item&gt;
+&lt;/el-collapse&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">禁用状态</span>
+              <span class="help-text">设置面板为禁用状态</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-collapse v-model="activeNames"&gt;
+  &lt;el-collapse-item title="一致性 Consistency" name="1"&gt;
+    &lt;div&gt;内容1&lt;/div&gt;
+  &lt;/el-collapse-item&gt;
+  &lt;el-collapse-item title="反馈 Feedback" name="2" disabled&gt;
+    &lt;div&gt;内容2（禁用）&lt;/div&gt;
+  &lt;/el-collapse-item&gt;
+&lt;/el-collapse&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">自定义标题</span>
+              <span class="help-text">使用插槽自定义标题内容</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-collapse v-model="activeNames"&gt;
+  &lt;el-collapse-item name="1"&gt;
+    &lt;template #title&gt;
+      &lt;span style="color: #409eff;"&gt;自定义标题&lt;/span&gt;
+    &lt;/template&gt;
+    &lt;div&gt;内容&lt;/div&gt;
+  &lt;/el-collapse-item&gt;
+&lt;/el-collapse&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">事件处理</span>
+              <span class="help-text">监听面板展开/收起事件</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-collapse v-model="activeNames" @change="handleChange"&gt;
+  &lt;el-collapse-item title="一致性 Consistency" name="1"&gt;
+    &lt;div&gt;内容1&lt;/div&gt;
+  &lt;/el-collapse-item&gt;
+&lt;/el-collapse&gt;
+
+&lt;script setup&gt;
+const handleChange = (val) => {
+  console.log('当前激活的面板:', val)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+
         <!-- 面板管理 -->
         <div class="form-section">
           <div class="section-title">面板管理</div>
@@ -280,5 +373,20 @@ const removeCollapseItem = (index) => {
   background: #fff;
   border: 1px solid #dcdfe6;
   border-radius: 4px;
+}
+
+.code-block {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
 }
 </style>

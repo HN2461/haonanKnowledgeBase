@@ -90,6 +90,94 @@
         <el-alert type="info" show-icon :closable="false" style="margin-bottom: 20px;"
           description="提示：1) Popconfirm 用于在用户执行危险操作前进行确认；2) 支持多种触发方式和位置；3) 可以自定义按钮和图标。" />
         
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-popconfirm
+  title="确定要删除吗？"
+  @confirm="handleConfirm"
+  @cancel="handleCancel"
+&gt;
+  &lt;template #reference&gt;
+    &lt;el-button type="danger"&gt;删除&lt;/el-button&gt;
+  &lt;/template&gt;
+&lt;/el-popconfirm&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 自定义按钮文本</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-popconfirm
+  title="确定要保存吗？"
+  confirm-button-text="保存"
+  cancel-button-text="取消"
+  @confirm="handleConfirm"
+  @cancel="handleCancel"
+&gt;
+  &lt;template #reference&gt;
+    &lt;el-button type="primary"&gt;保存&lt;/el-button&gt;
+  &lt;/template&gt;
+&lt;/el-popconfirm&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 自定义按钮类型</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-popconfirm
+  title="确定要重置吗？"
+  confirm-button-type="danger"
+  cancel-button-type="info"
+  @confirm="handleConfirm"
+  @cancel="handleCancel"
+&gt;
+  &lt;template #reference&gt;
+    &lt;el-button&gt;重置&lt;/el-button&gt;
+  &lt;/template&gt;
+&lt;/el-popconfirm&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 不同触发方式</h5>
+            <div class="code-block">
+              <pre><code>&lt;!-- 点击触发 --&gt;
+&lt;el-popconfirm trigger="click" title="点击触发"&gt;
+  &lt;template #reference&gt;
+    &lt;el-button&gt;点击触发&lt;/el-button&gt;
+  &lt;/template&gt;
+&lt;/el-popconfirm&gt;
+
+&lt;!-- 悬停触发 --&gt;
+&lt;el-popconfirm trigger="hover" title="悬停触发"&gt;
+  &lt;template #reference&gt;
+    &lt;el-button&gt;悬停触发&lt;/el-button&gt;
+  &lt;/template&gt;
+&lt;/el-popconfirm&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>const handleConfirm = () => {
+  console.log('用户确认了操作')
+  ElMessage.success('操作已确认')
+}
+
+const handleCancel = () => {
+  console.log('用户取消了操作')
+  ElMessage.info('操作已取消')
+}</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="section">
           <h4>基础属性</h4>
@@ -387,4 +475,30 @@ const onCancel = () => {
 .label-text { font-size: 14px; font-weight: 600; color: #303133; margin-bottom: 4px; }
 .prop-name { font-size: 12px; color: #409eff; background: #ecf5ff; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-bottom: 12px; font-family: 'Courier New', monospace; }
 .help-text { font-size: 12px; color: #909399; margin-top: 8px; line-height: 1.4; }
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
+}
 </style>

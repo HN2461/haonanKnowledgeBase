@@ -107,6 +107,215 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree :data="data" :props="defaultProps" /&gt;
+
+&lt;script setup&gt;
+const data = [
+  {
+    label: '一级 1',
+    children: [
+      { label: '二级 1-1' },
+      { label: '二级 1-2' }
+    ]
+  },
+  {
+    label: '一级 2',
+    children: [
+      { label: '二级 2-1' },
+      { label: '二级 2-2' }
+    ]
+  }
+]
+
+const defaultProps = {
+  children: 'children',
+  label: 'label'
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 可选择</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree 
+  :data="data" 
+  :props="defaultProps" 
+  show-checkbox 
+  @check="handleCheck" 
+/&gt;
+
+&lt;script setup&gt;
+const handleCheck = (data, checked) => {
+  console.log('选中节点:', data, checked)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 懒加载</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree 
+  :data="data" 
+  :props="defaultProps" 
+  :load="loadNode" 
+  lazy 
+/&gt;
+
+&lt;script setup&gt;
+const loadNode = (node, resolve) => {
+  if (node.level === 0) {
+    return resolve([{ name: 'region1' }, { name: 'region2' }])
+  }
+  if (node.level > 3) {
+    return resolve([])
+  }
+  setTimeout(() => {
+    resolve([
+      { name: 'leaf' },
+      { name: 'zone' }
+    ])
+  }, 1000)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 可拖拽</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree 
+  :data="data" 
+  :props="defaultProps" 
+  draggable 
+  :allow-drag="allowDrag" 
+  :allow-drop="allowDrop" 
+  @node-drag-start="handleDragStart" 
+  @node-drop="handleDrop" 
+/&gt;
+
+&lt;script setup&gt;
+const allowDrag = (node) => {
+  return node.level !== 1
+}
+
+const allowDrop = (draggingNode, dropNode, type) => {
+  return type !== 'inner'
+}
+
+const handleDragStart = (node) => {
+  console.log('开始拖拽:', node)
+}
+
+const handleDrop = (draggingNode, dropNode, dropType) => {
+  console.log('拖拽完成:', draggingNode, dropNode, dropType)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>5. 自定义节点内容</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree :data="data" :props="defaultProps"&gt;
+  &lt;template #default="{ node, data }"&gt;
+    &lt;span class="custom-tree-node"&gt;
+      &lt;span&gt;{{ node.label }}&lt;/span&gt;
+      &lt;span&gt;
+        &lt;el-button 
+          type="text" 
+          size="small" 
+          @click="append(data)"
+        &gt;
+          Append
+        &lt;/el-button&gt;
+        &lt;el-button 
+          type="text" 
+          size="small" 
+          @click="remove(node, data)"
+        &gt;
+          Delete
+        &lt;/el-button&gt;
+      &lt;/span&gt;
+    &lt;/span&gt;
+  &lt;/template&gt;
+&lt;/el-tree&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>6. 过滤节点</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-input 
+  v-model="filterText" 
+  placeholder="输入关键字进行过滤" 
+/&gt;
+&lt;el-tree 
+  :data="data" 
+  :props="defaultProps" 
+  :filter-node-method="filterNode" 
+  ref="tree" 
+/&gt;
+
+&lt;script setup&gt;
+import { ref, watch } from 'vue'
+
+const filterText = ref('')
+const tree = ref(null)
+
+const filterNode = (value, data) => {
+  if (!value) return true
+  return data.label.indexOf(value) !== -1
+}
+
+watch(filterText, (val) => {
+  tree.value.filter(val)
+})
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>7. 事件处理</h5>
+            <div class="code-block">
+              <pre><code>&lt;el-tree 
+  :data="data" 
+  :props="defaultProps" 
+  @node-click="handleNodeClick" 
+  @node-expand="handleNodeExpand" 
+  @node-collapse="handleNodeCollapse" 
+  @check-change="handleCheckChange" 
+/&gt;
+
+&lt;script setup&gt;
+const handleNodeClick = (data, node) => {
+  console.log('节点点击:', data, node)
+}
+
+const handleNodeExpand = (data, node) => {
+  console.log('节点展开:', data, node)
+}
+
+const handleNodeCollapse = (data, node) => {
+  console.log('节点收起:', data, node)
+}
+
+const handleCheckChange = (data, checked, indeterminate) => {
+  console.log('选中状态改变:', data, checked, indeterminate)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -631,5 +840,31 @@ const allowDrop = (draggingNode, dropNode, type) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.usage-item {
+  margin-bottom: 20px;
+}
+
+.usage-item h5 {
+  margin: 0 0 8px 0;
+  color: #409eff;
+  font-size: 14px;
 }
 </style>

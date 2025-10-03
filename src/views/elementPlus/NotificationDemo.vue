@@ -39,6 +39,104 @@
         <el-alert type="info" show-icon :closable="false" style="margin-bottom: 20px;"
           description="提示：1) Notification 是全局通知组件；2) 支持多种类型和位置；3) 可以自定义内容和样式。" />
         
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>import { ElNotification } from 'element-plus'
+
+// 成功通知
+ElNotification.success({
+  title: '成功',
+  message: '这是一条成功的提示消息'
+})
+
+// 警告通知
+ElNotification.warning({
+  title: '警告',
+  message: '这是一条警告的提示消息'
+})
+
+// 错误通知
+ElNotification.error({
+  title: '错误',
+  message: '这是一条错误的提示消息'
+})
+
+// 信息通知
+ElNotification.info({
+  title: '消息',
+  message: '这是一条消息的提示消息'
+})</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 自定义通知</h5>
+            <div class="code-block">
+              <pre><code>ElNotification({
+  title: '自定义通知',
+  message: '这是一个自定义的通知',
+  type: 'success',
+  position: 'top-right',
+  duration: 3000,
+  showClose: true
+})</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 不同位置</h5>
+            <div class="code-block">
+              <pre><code>// 右上角
+ElNotification({
+  title: '右上角',
+  message: '这是右上角的通知',
+  position: 'top-right'
+})
+
+// 左上角
+ElNotification({
+  title: '左上角',
+  message: '这是左上角的通知',
+  position: 'top-left'
+})
+
+// 右下角
+ElNotification({
+  title: '右下角',
+  message: '这是右下角的通知',
+  position: 'bottom-right'
+})
+
+// 左下角
+ElNotification({
+  title: '左下角',
+  message: '这是左下角的通知',
+  position: 'bottom-left'
+})</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 关闭通知</h5>
+            <div class="code-block">
+              <pre><code>// 关闭所有通知
+ElNotification.closeAll()
+
+// 关闭指定通知
+const notification = ElNotification({
+  title: '通知',
+  message: '这是一个通知'
+})
+notification.close()</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="section">
           <h4>基础属性</h4>

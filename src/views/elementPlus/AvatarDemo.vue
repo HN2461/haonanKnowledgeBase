@@ -76,6 +76,113 @@
       size="45%"
     >
       <div class="settings-container">
+        <!-- 使用说明 -->
+        <div class="form-section">
+          <div class="section-title">使用说明</div>
+          
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">基础用法</span>
+              <span class="help-text">头像的基本使用方式</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-avatar&gt;用户&lt;/el-avatar&gt;
+&lt;el-avatar src="https://example.com/avatar.jpg" /&gt;
+&lt;el-avatar icon="User" /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">不同尺寸</span>
+              <span class="help-text">设置头像的尺寸</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-avatar :size="60"&gt;大&lt;/el-avatar&gt;
+&lt;el-avatar :size="40"&gt;中&lt;/el-avatar&gt;
+&lt;el-avatar :size="20"&gt;小&lt;/el-avatar&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">不同形状</span>
+              <span class="help-text">设置头像的形状</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-avatar shape="circle"&gt;圆&lt;/el-avatar&gt;
+&lt;el-avatar shape="square"&gt;方&lt;/el-avatar&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">图片头像</span>
+              <span class="help-text">使用图片作为头像</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-avatar
+  src="https://example.com/avatar.jpg"
+  alt="用户头像"
+  :fit="cover"
+/&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">图标头像</span>
+              <span class="help-text">使用图标作为头像</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-avatar icon="User" /&gt;
+&lt;el-avatar icon="Setting" /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">文字头像</span>
+              <span class="help-text">使用文字作为头像</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-avatar&gt;U&lt;/el-avatar&gt;
+&lt;el-avatar&gt;用户&lt;/el-avatar&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">图片适应方式</span>
+              <span class="help-text">设置图片的适应方式</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-avatar src="image.jpg" fit="cover" /&gt;
+&lt;el-avatar src="image.jpg" fit="contain" /&gt;
+&lt;el-avatar src="image.jpg" fit="fill" /&gt;</code></pre>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <div class="label-text">
+              <span class="prop-name">事件处理</span>
+              <span class="help-text">监听头像事件</span>
+            </div>
+            <div class="code-block">
+              <pre><code>&lt;el-avatar
+  src="image.jpg"
+  @error="handleError"
+/&gt;
+
+&lt;script setup&gt;
+const handleError = (event) => {
+  console.log('图片加载失败:', event)
+}
+&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+
         <!-- 基础属性 -->
         <div class="form-section">
           <div class="section-title">基础属性</div>
@@ -287,5 +394,20 @@ const handleError = (event) => {
 .help-text {
   color: #909399;
   font-size: 12px;
+}
+
+.code-block {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  padding: 12px;
+  margin: 8px 0;
+}
+
+.code-block pre {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 1.4;
 }
 </style>

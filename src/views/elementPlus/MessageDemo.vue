@@ -39,6 +39,59 @@
         <el-alert type="info" show-icon :closable="false" style="margin-bottom: 20px;"
           description="提示：1) Message 是全局消息提示组件；2) 支持多种类型和样式；3) 可以自定义内容和行为。" />
         
+        <!-- 使用说明 -->
+        <div class="section">
+          <h4>使用说明</h4>
+          
+          <div class="usage-item">
+            <h5>1. 基础用法</h5>
+            <div class="code-block">
+              <pre><code>import { ElMessage } from 'element-plus'
+
+// 成功消息
+ElMessage.success('这是一条成功消息')
+
+// 警告消息
+ElMessage.warning('这是一条警告消息')
+
+// 错误消息
+ElMessage.error('这是一条错误消息')
+
+// 信息消息
+ElMessage.info('这是一条信息消息')</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>2. 自定义消息</h5>
+            <div class="code-block">
+              <pre><code>ElMessage({
+  message: '恭喜你，这是一条成功消息',
+  type: 'success',
+  duration: 3000,
+  showClose: true
+})</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>3. 分组消息</h5>
+            <div class="code-block">
+              <pre><code>// 分组消息，相同类型的消息会合并
+ElMessage.success('操作成功')
+ElMessage.success('数据已保存')
+ElMessage.success('提交完成')</code></pre>
+            </div>
+          </div>
+          
+          <div class="usage-item">
+            <h5>4. 关闭所有消息</h5>
+            <div class="code-block">
+              <pre><code>ElMessage.closeAll()</code></pre>
+            </div>
+          </div>
+        </div>
+        
         <!-- 基础属性 -->
         <div class="section">
           <h4>基础属性</h4>
