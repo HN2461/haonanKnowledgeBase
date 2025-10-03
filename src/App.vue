@@ -1,39 +1,33 @@
 <template>
   <!-- 登录页面 - 作为应用入口 -->
   <Login v-if="!userStore.isLoggedIn" @login-success="handleLoginSuccess" />
-  
+
   <!-- 主应用界面 - 登录后显示 -->
   <div v-else class="app-container">
     <!-- 顶部导航栏 -->
     <el-header class="header">
       <div class="header-left">
-        <el-button text icon="Menu" 
-        @click="menuStore.toggleCollapse" class="collapse-btn" />
+        <el-button text icon="Menu" @click="menuStore.toggleCollapse" class="collapse-btn" />
         <div class="logo-wrapper">
-          <el-icon class="logo-icon" :size="28"><DataAnalysis /></el-icon>
+          <el-icon class="logo-icon" :size="28">
+            <DataAnalysis />
+          </el-icon>
           <h1 class="title">浩南知识库</h1>
         </div>
       </div>
 
       <div class="header-center">
-        <el-autocomplete
-          v-model="searchValue"
-          :fetch-suggestions="querySearchAsync"
-          placeholder="搜索页面..."
-          prefix-icon="Search"
-          class="search-input"
-          @select="handleSelect"
-          @keyup.enter="handleSearch"
-          clearable
-        >
+        <el-autocomplete v-model="searchValue" :fetch-suggestions="querySearchAsync" placeholder="搜索页面..."
+          prefix-icon="Search" class="search-input" @select="handleSelect" @keyup.enter="handleSearch" clearable>
           <template #default="{ item }">
             <div class="search-item">
               <el-icon class="search-icon">
                 <component :is="item.icon" />
               </el-icon>
               <div class="search-content">
-                <div class="search-title">{{ item.title }}</div>
+                <div class="search-title" v-html="highlightText(item.title, searchValue)"></div>
                 <div class="search-path">{{ item.path }}</div>
+                <div class="search-category">{{ item.category }}</div>
               </div>
             </div>
           </template>
@@ -44,40 +38,48 @@
         <el-tooltip content="刷新页面" placement="bottom">
           <el-button icon="Refresh" circle @click="handleRefresh" />
         </el-tooltip>
-        
+
         <el-tooltip content="新增菜单" placement="bottom">
           <el-button icon="Plus" circle @click="router.push('/menu/management')" />
         </el-tooltip>
-        
-        <!-- 消息通知，采用徽章组件 -->
-        <el-tooltip content="消息通知" placement="bottom">
-          <el-badge :value="3" class="notification-badge">
-            <el-button icon="Bell" circle />
-          </el-badge>
+
+        <!-- 开发记录，隐藏徽章，仅显示按钮 -->
+        <el-tooltip content="开发记录" placement="bottom">
+          <el-button icon="Edit" circle @click="router.push('/message-center')" />
         </el-tooltip>
-        
+
         <!-- 用户信息，采用下拉菜单组件 -->
         <el-dropdown @command="handleUserCommand" class="user-dropdown">
           <div class="user-info">
             <el-avatar v-if="userStore.userAvatar" :src="userStore.userAvatar" :size="32" />
             <el-avatar v-else :size="32">
-              <el-icon><User /></el-icon>
+              <el-icon>
+                <User />
+              </el-icon>
             </el-avatar>
             <span class="username">{{ userStore.displayName }}</span>
-            <el-icon class="dropdown-icon"><ArrowDown /></el-icon>
+            <el-icon class="dropdown-icon">
+              <ArrowDown />
+            </el-icon>
           </div>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item command="profile">
-                <el-icon><User /></el-icon>
+                <el-icon>
+                  <User />
+                </el-icon>
                 个人中心
               </el-dropdown-item>
               <el-dropdown-item command="settings">
-                <el-icon><Setting /></el-icon>
+                <el-icon>
+                  <Setting />
+                </el-icon>
                 设置
               </el-dropdown-item>
               <el-dropdown-item divided command="logout">
-                <el-icon><SwitchButton /></el-icon>
+                <el-icon>
+                  <SwitchButton />
+                </el-icon>
                 退出登录
               </el-dropdown-item>
             </el-dropdown-menu>
@@ -88,48 +90,26 @@
 
     <el-container class="main-container">
       <!-- 侧边栏：包含菜单导航 -->
-        <el-aside :width="sidebarWidth()" 
-        class="sidebar" :style="{ '--sidebar-width': sidebarWidth() }">
-          <!-- Element Plus 菜单组件 -->
-          <el-menu 
-            :default-active="menuStore.activeMenu"
-            mode="vertical"
-            :collapse="menuStore.isCollapse"
-            :unique-opened="true"
-            @select="menuStore.handleMenuSelect"
-            @open="handleMenuOpen"
-            @close="handleMenuClose"
-            @collapse="handleMenuClose"
-            class="sidebar-menu">
-            <!-- 使用递归组件渲染无限层级菜单 -->
-            <RecursiveMenu 
-              :items="menuStore.menuItems"
-              @update:expandedLevel="handleExpandedLevelUpdate"
-              @menuItemClick="handleMenuSelect"
-              @iconError="handleMenuItemIconError"
-            />
-          </el-menu>
-        </el-aside>
+      <el-aside :width="sidebarWidth()" class="sidebar" :style="{ '--sidebar-width': sidebarWidth() }">
+        <!-- Element Plus 菜单组件 -->
+        <el-menu :default-active="menuStore.activeMenu" mode="vertical" :collapse="menuStore.isCollapse"
+          :unique-opened="true" @select="menuStore.handleMenuSelect" @open="handleMenuOpen" @close="handleMenuClose"
+          @collapse="handleMenuClose" class="sidebar-menu">
+          <!-- 使用递归组件渲染无限层级菜单 -->
+          <RecursiveMenu :items="menuStore.menuItems" @update:expandedLevel="handleExpandedLevelUpdate"
+            @menuItemClick="handleMenuSelect" @iconError="handleMenuItemIconError" />
+        </el-menu>
+      </el-aside>
 
       <!-- 主内容区域 -->
       <el-main class="main-content">
         <!-- 面包屑导航 -->
-        <Breadcrumb 
-          :show-page-title="true"
-          class="breadcrumb-navigation"
-        />
-        
+        <Breadcrumb :show-page-title="true" class="breadcrumb-navigation" />
+
         <!-- 标签页导航 -->
-        <TabsNavigation
-          :tabs="openedTabs"
-          :active-tab="activeTab"
-          @tab-click="switchTab"
-          @close-tab="closeTab"
-          @close-other-tabs="closeOtherTabs"
-          @close-all-tabs="closeAllTabs"
-          @tabs-reordered="handleTabsReordered"
-        />
-        
+        <TabsNavigation :tabs="openedTabs" :active-tab="activeTab" @tab-click="switchTab" @close-tab="closeTab"
+          @close-other-tabs="closeOtherTabs" @close-all-tabs="closeAllTabs" @tabs-reordered="handleTabsReordered" />
+
         <!-- 页面内容 -->
         <div class="page-content">
           <router-view />
@@ -143,10 +123,10 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { ElMessage } from 'element-plus'
-import { 
-  User, 
-  Setting, 
-  SwitchButton 
+import {
+  User,
+  Setting,
+  SwitchButton
 } from '@element-plus/icons-vue'
 import { useMenuStore } from './store/menuStore'
 import { useUserStore } from './store/userStore'
@@ -213,14 +193,14 @@ const handleMenuSelect = (index, menuItem) => {
     }
     return null
   }
-  
+
   // 获取菜单项信息
   const item = menuItem || findMenuItem(menuStore.menuItems)
   if (!item || !item.path) return
-  
+
   // 检查标签页是否已存在
   const existingTab = openedTabs.value.find(tab => tab.path === item.path)
-  
+
   if (!existingTab) {
     // 添加新标签页
     openedTabs.value.push({
@@ -230,7 +210,7 @@ const handleMenuSelect = (index, menuItem) => {
       icon: item.icon      // 图标
     })
   }
-  
+
   // 设置当前活动标签页
   activeTab.value = item.path
 }
@@ -250,10 +230,10 @@ const handleTabsReordered = (newTabsOrder) => {
 // 关闭标签页
 const closeTab = (path, event) => {
   event?.stopPropagation()
-  
+
   const index = openedTabs.value.findIndex(tab => tab.path === path)
   if (index === -1) return
-  
+
   // 如果关闭的是当前活动标签页，切换到其他标签页
   if (path === activeTab.value) {
     const newActiveTab = index > 0 ? openedTabs.value[index - 1] : (openedTabs.value.length > 1 ? openedTabs.value[1] : null)
@@ -262,7 +242,7 @@ const closeTab = (path, event) => {
       window.location.href = '#' + newActiveTab.path
     }
   }
-  
+
   // 移除标签页
   openedTabs.value.splice(index, 1)
 }
@@ -305,7 +285,7 @@ watch(() => route.path, (newPath) => {
       }
       return null
     }
-    
+
     const menuItem = findRouteInMenu(menuStore.menuItems)
     if (menuItem) {
       handleMenuSelect(menuItem.index, menuItem)
@@ -329,7 +309,7 @@ const openedMenus = ref(new Set())
 const handleMenuOpen = (index) => {
   console.log('菜单展开:', index)
   openedMenus.value.add(index)
-  
+
   // 计算当前展开菜单的最大层级
   const currentMaxLevel = calculateCurrentExpandedLevel()
   expandedMenuLevel.value = currentMaxLevel
@@ -340,11 +320,11 @@ const handleMenuOpen = (index) => {
 const handleMenuClose = (index) => {
   console.log('菜单收起:', index)
   console.log('收起前展开的菜单:', Array.from(openedMenus.value))
-  
+
   openedMenus.value.delete(index)
-  
+
   console.log('收起后展开的菜单:', Array.from(openedMenus.value))
-  
+
   // 重新计算当前展开菜单的最大层级
   const currentMaxLevel = calculateCurrentExpandedLevel()
   expandedMenuLevel.value = currentMaxLevel
@@ -354,7 +334,7 @@ const handleMenuClose = (index) => {
 // 计算当前实际展开菜单的最大层级
 const calculateCurrentExpandedLevel = () => {
   let maxLevel = 0
-  
+
   // 遍历所有展开的菜单项，计算它们的层级
   openedMenus.value.forEach(menuIndex => {
     const level = getMenuLevel(menuStore.menuItems, menuIndex, 0)
@@ -362,7 +342,7 @@ const calculateCurrentExpandedLevel = () => {
       maxLevel = Math.max(maxLevel, level)
     }
   })
-  
+
   console.log(`计算展开层级: 展开菜单=${Array.from(openedMenus.value)}, 最大层级=${maxLevel}`)
   return maxLevel
 }
@@ -388,14 +368,14 @@ const sidebarWidth = () => {
   if (menuStore.isCollapse) {
     return '64px'
   }
-  
+
   // 基础宽度250px，每增加一级展开层级额外增加30px，确保有足够空间显示文字
   const baseWidth = 250
   const extraWidth = expandedMenuLevel.value * 30
   const finalWidth = Math.min(baseWidth + extraWidth, 600)
-  
+
   console.log(`侧边栏宽度计算: 基础宽度=${baseWidth}, 当前展开层级=${expandedMenuLevel.value}, 额外宽度=${extraWidth}, 最终宽度=${finalWidth}px`)
-  
+
   return `${finalWidth}px`
 }
 
@@ -406,16 +386,67 @@ const sidebarWidth = () => {
  */
 const initSearchablePages = () => {
   const pages = []
-  
+
   // 递归收集所有菜单项
   const collectMenuItems = (items, parentPath = '') => {
     items.forEach(item => {
       if (item.path && item.path !== '#') {
+        // 为每个页面添加更多搜索关键词
+        const keywords = []
+
+        // 从标题中提取关键词
+        if (item.title.includes('按钮')) keywords.push('button', 'btn', '点击')
+        if (item.title.includes('输入')) keywords.push('input', '输入框', '表单')
+        if (item.title.includes('表格')) keywords.push('table', '数据', '列表')
+        if (item.title.includes('表单')) keywords.push('form', '验证', '提交')
+        if (item.title.includes('对话框')) keywords.push('dialog', '弹窗', '模态框')
+        if (item.title.includes('抽屉')) keywords.push('drawer', '侧边栏')
+        if (item.title.includes('消息')) keywords.push('message', '通知', '提示')
+        if (item.title.includes('加载')) keywords.push('loading', '加载中', '等待')
+        if (item.title.includes('分页')) keywords.push('pagination', '翻页', '页码')
+        if (item.title.includes('标签')) keywords.push('tag', '标签页', '标记')
+        if (item.title.includes('步骤')) keywords.push('steps', '流程', '向导')
+        if (item.title.includes('时间')) keywords.push('time', '日期', '选择器')
+        if (item.title.includes('选择')) keywords.push('select', '下拉', '选项')
+        if (item.title.includes('开关')) keywords.push('switch', '切换', '开关')
+        if (item.title.includes('单选框')) keywords.push('radio', '单选', '选项')
+        if (item.title.includes('复选框')) keywords.push('checkbox', '多选', '勾选')
+        if (item.title.includes('滑块')) keywords.push('slider', '范围', '滑动')
+        if (item.title.includes('评分')) keywords.push('rate', '星级', '评价')
+        if (item.title.includes('进度')) keywords.push('progress', '进度条', '百分比')
+        if (item.title.includes('头像')) keywords.push('avatar', '头像', '用户')
+        if (item.title.includes('徽章')) keywords.push('badge', '标记', '数字')
+        if (item.title.includes('面包屑')) keywords.push('breadcrumb', '导航', '路径')
+        if (item.title.includes('日历')) keywords.push('calendar', '日期', '月历')
+        if (item.title.includes('级联')) keywords.push('cascader', '级联', '联动')
+        if (item.title.includes('折叠')) keywords.push('collapse', '折叠', '展开')
+        if (item.title.includes('配置')) keywords.push('config', '设置', '配置')
+        if (item.title.includes('容器')) keywords.push('container', '布局', '容器')
+        if (item.title.includes('分割')) keywords.push('divider', '分割线', '分隔')
+        if (item.title.includes('空状态')) keywords.push('empty', '空', '无数据')
+        if (item.title.includes('图片')) keywords.push('image', '图片', '预览')
+        if (item.title.includes('链接')) keywords.push('link', '链接', '跳转')
+        if (item.title.includes('确认')) keywords.push('popconfirm', '确认', '删除')
+        if (item.title.includes('结果')) keywords.push('result', '结果', '状态')
+        if (item.title.includes('返回')) keywords.push('backtop', '返回顶部', '顶部')
+        if (item.title.includes('滚动')) keywords.push('scrollbar', '滚动条', '滚动')
+        if (item.title.includes('骨架')) keywords.push('skeleton', '骨架屏', '加载')
+        if (item.title.includes('空间')) keywords.push('space', '间距', '布局')
+        if (item.title.includes('文本')) keywords.push('text', '文字', '文本')
+        if (item.title.includes('时间线')) keywords.push('timeline', '时间线', '历史')
+        if (item.title.includes('穿梭')) keywords.push('transfer', '穿梭框', '移动')
+        if (item.title.includes('树形')) keywords.push('tree', '树形', '节点')
+        if (item.title.includes('树选择')) keywords.push('treeselect', '树选择', '树形选择')
+        if (item.title.includes('上传')) keywords.push('upload', '上传', '文件')
+        if (item.title.includes('自动补全')) keywords.push('autocomplete', '自动补全', '补全')
+        if (item.title.includes('走马灯')) keywords.push('carousel', '轮播', '幻灯片')
+
         pages.push({
           title: item.title,
           path: item.path,
           icon: item.icon || 'Document',
-          category: parentPath || '主要功能'
+          category: parentPath || '主要功能',
+          keywords: keywords.join(' ')
         })
       }
       if (item.children && item.children.length > 0) {
@@ -423,45 +454,103 @@ const initSearchablePages = () => {
       }
     })
   }
-  
+
   // 收集所有菜单项
   collectMenuItems(menuStore.menuItems)
-  
+
   // 添加一些额外的页面
   pages.push(
     { title: '仪表盘', path: '/dashboard', icon: 'Odometer', category: '主要功能' },
     { title: '菜单管理', path: '/menu/management', icon: 'Menu', category: '系统管理' }
   )
-  
+
   searchablePages.value = pages
 }
 
 /**
- * 异步搜索建议
+ * 异步搜索建议 - 增强版模糊搜索
  * @param {string} queryString - 搜索关键词
  * @param {Function} callback - 回调函数
  */
 const querySearchAsync = (queryString, callback) => {
-  if (!queryString) {
+  if (!queryString || queryString.trim().length === 0) {
     callback([])
     return
   }
-  
-  const results = searchablePages.value.filter(item => 
-    item.title.toLowerCase().includes(queryString.toLowerCase()) ||
-    item.path.toLowerCase().includes(queryString.toLowerCase()) ||
-    item.category.toLowerCase().includes(queryString.toLowerCase())
-  )
-  
-  // 按分类和标题排序
+
+  const query = queryString.toLowerCase().trim()
+  const results = []
+
+  // 为每个页面计算匹配分数
+  searchablePages.value.forEach(item => {
+    let score = 0
+    const title = item.title.toLowerCase()
+    const path = item.path.toLowerCase()
+    const category = item.category.toLowerCase()
+    const keywords = (item.keywords || '').toLowerCase()
+
+    // 标题完全匹配 - 最高分
+    if (title === query) {
+      score += 100
+    }
+    // 标题开头匹配 - 高分
+    else if (title.startsWith(query)) {
+      score += 80
+    }
+    // 标题包含匹配 - 中分
+    else if (title.includes(query)) {
+      score += 60
+    }
+    // 关键词包含匹配 - 中分
+    else if (keywords.includes(query)) {
+      score += 50
+    }
+    // 路径包含匹配 - 低分
+    else if (path.includes(query)) {
+      score += 40
+    }
+    // 分类包含匹配 - 低分
+    else if (category.includes(query)) {
+      score += 30
+    }
+
+    // 如果分数大于0，添加到结果中
+    if (score > 0) {
+      results.push({
+        ...item,
+        score: score
+      })
+    }
+  })
+
+  // 按分数降序排序，分数相同时按分类和标题排序
   results.sort((a, b) => {
+    if (a.score !== b.score) {
+      return b.score - a.score
+    }
     if (a.category !== b.category) {
       return a.category.localeCompare(b.category)
     }
     return a.title.localeCompare(b.title)
   })
-  
-  callback(results)
+
+  // 限制结果数量，避免过多建议
+  const limitedResults = results.slice(0, 20)
+
+  callback(limitedResults)
+}
+
+/**
+ * 高亮显示匹配的文本
+ * @param {string} text - 原始文本
+ * @param {string} query - 搜索关键词
+ * @returns {string} - 高亮后的HTML
+ */
+const highlightText = (text, query) => {
+  if (!query || !text) return text
+
+  const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi')
+  return text.replace(regex, '<mark class="search-highlight">$1</mark>')
 }
 
 /**
@@ -476,30 +565,82 @@ const handleSelect = (item) => {
 }
 
 /**
- * 处理搜索
+ * 处理搜索 - 使用与建议相同的搜索逻辑
  */
 const handleSearch = () => {
   if (!searchValue.value.trim()) {
     ElMessage.warning('请输入搜索关键词')
     return
   }
-  
-  const results = searchablePages.value.filter(item => 
-    item.title.toLowerCase().includes(searchValue.value.toLowerCase()) ||
-    item.path.toLowerCase().includes(searchValue.value.toLowerCase())
-  )
-  
+
+  const query = searchValue.value.toLowerCase().trim()
+  const results = []
+
+  // 使用与querySearchAsync相同的搜索逻辑
+  searchablePages.value.forEach(item => {
+    let score = 0
+    const title = item.title.toLowerCase()
+    const path = item.path.toLowerCase()
+    const category = item.category.toLowerCase()
+    const keywords = (item.keywords || '').toLowerCase()
+
+    // 标题完全匹配 - 最高分
+    if (title === query) {
+      score += 100
+    }
+    // 标题开头匹配 - 高分
+    else if (title.startsWith(query)) {
+      score += 80
+    }
+    // 标题包含匹配 - 中分
+    else if (title.includes(query)) {
+      score += 60
+    }
+    // 关键词包含匹配 - 中分
+    else if (keywords.includes(query)) {
+      score += 50
+    }
+    // 路径包含匹配 - 低分
+    else if (path.includes(query)) {
+      score += 40
+    }
+    // 分类包含匹配 - 低分
+    else if (category.includes(query)) {
+      score += 30
+    }
+
+    // 如果分数大于0，添加到结果中
+    if (score > 0) {
+      results.push({
+        ...item,
+        score: score
+      })
+    }
+  })
+
+  // 按分数排序
+  results.sort((a, b) => {
+    if (a.score !== b.score) {
+      return b.score - a.score
+    }
+    if (a.category !== b.category) {
+      return a.category.localeCompare(b.category)
+    }
+    return a.title.localeCompare(b.title)
+  })
+
   if (results.length === 0) {
     ElMessage.info('未找到相关页面')
     return
   }
-  
+
   if (results.length === 1) {
     // 如果只有一个结果，直接跳转
     handleSelect(results[0])
   } else {
-    // 如果有多个结果，显示第一个
+    // 如果有多个结果，显示第一个（最高分）
     handleSelect(results[0])
+    ElMessage.success(`找到 ${results.length} 个相关页面，已跳转到最佳匹配`)
   }
 }
 
@@ -539,13 +680,13 @@ const handleLogout = () => {
   try {
     // 调用用户store的退出登录方法
     userStore.logout()
-    
+
     // 关闭所有打开的标签页
     closeAllTabs()
-    
+
     // 重置路由到根路径
     router.push('/')
-    
+
   } catch (error) {
     console.error('退出登录失败:', error)
     ElMessage.error('退出登录失败，请刷新页面重试')
@@ -559,7 +700,7 @@ const handleLoginSuccess = () => {
   // 登录成功后，App.vue 会根据 userStore.isLoggedIn 自动切换到主应用界面
   // 跳转到仪表板
   router.push('/dashboard')
-  
+
   // 初始化搜索页面数据（因为之前可能还没有初始化）
   initSearchablePages()
 }
@@ -570,14 +711,14 @@ const handleLoginSuccess = () => {
 onMounted(() => {
   // 初始化用户状态（从本地存储恢复登录状态）
   userStore.initUserStore()
-  
+
   // 只有在已登录时才初始化搜索页面数据
   if (userStore.isLoggedIn) {
     initSearchablePages()
   }
-  
+
   // 组件挂载时的其他初始化操作
-  
+
   // 使用MutationObserver监听菜单DOM变化
   const observer = new MutationObserver((mutations) => {
     mutations.forEach((mutation) => {
@@ -586,7 +727,7 @@ onMounted(() => {
         if (target.classList.contains('el-sub-menu')) {
           const isOpen = target.classList.contains('is-opened')
           const menuIndex = target.getAttribute('data-menu-index') || target.querySelector('[data-menu-index]')?.getAttribute('data-menu-index')
-          
+
           if (menuIndex) {
             if (isOpen) {
               console.log('通过DOM检测到菜单展开:', menuIndex)
@@ -600,7 +741,7 @@ onMounted(() => {
       }
     })
   })
-  
+
   // 开始观察菜单容器
   const menuContainer = document.querySelector('.sidebar-menu')
   if (menuContainer) {
@@ -752,6 +893,24 @@ const handleMenuItemIconError = (iconName) => {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+
+.search-category {
+  font-size: 11px;
+  color: #c0c4cc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 搜索高亮样式 */
+.search-highlight {
+  background-color: #fff2cc;
+  color: #e6a23c;
+  padding: 1px 2px;
+  border-radius: 2px;
+  font-weight: 600;
 }
 
 .search-input .el-input__inner:focus {
@@ -954,12 +1113,14 @@ const handleMenuItemIconError = (iconName) => {
 .sidebar .el-menu.el-menu--collapse .el-menu-item {
   font-size: 0 !important;
 }
+
 /* 保持图标可见并设置合适尺寸 */
 .sidebar .el-menu.el-menu--collapse .el-sub-menu__title .el-icon,
 .sidebar .el-menu.el-menu--collapse .el-menu-item .el-icon {
   font-size: 18px !important;
   margin: 0 !important;
 }
+
 /* 确保折叠状态下完全隐藏文字 */
 .sidebar .el-menu.el-menu--collapse .el-sub-menu__title *:not(.el-icon):not(svg):not(i),
 .sidebar .el-menu.el-menu--collapse .el-menu-item *:not(.el-icon):not(svg):not(i) {

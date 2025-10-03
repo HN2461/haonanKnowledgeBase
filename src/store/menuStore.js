@@ -112,7 +112,12 @@ export const useMenuStore = defineStore('menu', () => {
             { index: 'ep-result', title: '结果 Result', path: '/ep/result' },
             { index: 'ep-skeleton', title: '骨架屏 Skeleton', path: '/ep/skeleton' },
             { index: 'ep-scrollbar', title: '滚动条 Scrollbar', path: '/ep/scrollbar' },
-            { index: 'ep-carousel', title: '走马灯 Carousel', path: '/ep/carousel' }
+            { index: 'ep-carousel', title: '走马灯 Carousel', path: '/ep/carousel' },
+            { index: 'ep-popover', title: '弹出框 Popover', path: '/ep/popover' },
+            { index: 'ep-tooltip', title: '文字提示 Tooltip', path: '/ep/tooltip' },
+            { index: 'ep-anchor', title: '锚点 Anchor', path: '/ep/anchor' },
+            { index: 'ep-dropdown', title: '下拉菜单 Dropdown', path: '/ep/dropdown' },
+            { index: 'ep-page-header', title: '页头 Page Header', path: '/ep/page-header' }
           ]
         },
         {

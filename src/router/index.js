@@ -58,6 +58,12 @@ import TreeSelectDemo from '../views/elementPlus/TreeSelectDemo.vue'
 import CascaderDemo from '../views/elementPlus/CascaderDemo.vue'
 import AutocompleteDemo from '../views/elementPlus/AutocompleteDemo.vue'
 import CarouselDemo from '../views/elementPlus/CarouselDemo.vue'
+import PopoverDemo from '../views/elementPlus/PopoverDemo.vue'
+import TooltipDemo from '../views/elementPlus/TooltipDemo.vue'
+import AnchorDemo from '../views/elementPlus/AnchorDemo.vue'
+import DropdownDemo from '../views/elementPlus/DropdownDemo.vue'
+import PageHeaderDemo from '../views/elementPlus/PageHeaderDemo.vue'
+import MessageCenter from '../views/MessageCenter.vue'
 
 const routes = [
   {
@@ -154,6 +160,12 @@ const routes = [
   { path: '/ep/cascader', name: 'EpCascader', component: CascaderDemo, meta: { title: 'EP-级联选择器', icon: 'Connection' } },
   { path: '/ep/autocomplete', name: 'EpAutocomplete', component: AutocompleteDemo, meta: { title: 'EP-自动补全', icon: 'Search' } },
   { path: '/ep/carousel', name: 'EpCarousel', component: CarouselDemo, meta: { title: 'EP-走马灯', icon: 'Picture' } },
+  { path: '/ep/popover', name: 'EpPopover', component: PopoverDemo, meta: { title: 'EP-弹出框', icon: 'ChatDotSquare' } },
+  { path: '/ep/tooltip', name: 'EpTooltip', component: TooltipDemo, meta: { title: 'EP-文字提示', icon: 'InfoFilled' } },
+  { path: '/ep/anchor', name: 'EpAnchor', component: AnchorDemo, meta: { title: 'EP-锚点', icon: 'Link' } },
+  { path: '/ep/dropdown', name: 'EpDropdown', component: DropdownDemo, meta: { title: 'EP-下拉菜单', icon: 'ArrowDown' } },
+  { path: '/ep/page-header', name: 'EpPageHeader', component: PageHeaderDemo, meta: { title: 'EP-页头', icon: 'Document' } },
+  { path: '/message-center', name: 'MessageCenter', component: MessageCenter, meta: { title: '消息中心', icon: 'Bell' } },
   
   // 404 页面 - 必须放在所有路由的最后
   {

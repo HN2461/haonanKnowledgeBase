@@ -137,9 +137,15 @@
               &lt;/el-upload&gt;
 
               &lt;script setup&gt;
-              const beforeUpload = (file) => {
-              const isLt2M = file.size / 1024 / 1024 < 2 if (!isLt2M) { ElMessage.error('文件大小不能超过 2MB!') return false }
-                return true } &lt;/script&gt;</code>
+              const beforeUpload = (file) =&gt; {
+                const isLt2M = file.size / 1024 / 1024 &lt; 2
+                if (!isLt2M) {
+                  ElMessage.error('文件大小不能超过 2MB!')
+                  return false
+                }
+                return true
+              }
+              &lt;/script&gt;</code>
           </pre>
             </div>
           </div>
