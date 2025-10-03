@@ -28,6 +28,7 @@ export const useMenuStore = defineStore('menu', () => {
    * - title: 菜单显示名称
    * - icon: Element Plus 图标名称
    * - path: 路由路径
+   * - sort: 排序值，数值越小越靠前（可选，默认为100）
    * - children: 子菜单数组（可选）
    */
   const menuItems = ref([
@@ -37,7 +38,33 @@ export const useMenuStore = defineStore('menu', () => {
       title: '仪表板',
       icon: 'DataAnalysis',
       path: '/dashboard',
+      sort: 1,
       children: [] // 无子菜单
+    },
+    
+    // 个人技术文档
+    {
+      index: 'personal-docs',
+      title: '个人技术文档',
+      icon: 'Document',
+      path: '/personal-docs',
+      sort: 2,
+      children: [
+        {
+          index: 'docs-frontend',
+          title: '前端技术',
+          path: '/personal-docs/frontend',
+          sort: 1,
+          children: []
+        },
+        {
+          index: 'docs-notes',
+          title: '随记文档',
+          path: '/personal-docs/notes',
+          sort: 2,
+          children: []
+        }
+      ]
     },
     
     // 新增菜单入口改为头部按钮，不在侧边栏展示
@@ -48,111 +75,119 @@ export const useMenuStore = defineStore('menu', () => {
       title: 'ElementPlus组件',
       icon: 'Collection',
       path: '/ep',
+      sort: 3,
       children: [
         {
           index: 'ep-basic',
           title: '基础',
           path: '/ep/basic',
+          sort: 1,
           children: [
-            { index: 'ep-button', title: '按钮 Button', path: '/ep/button' },
-            { index: 'ep-button-group', title: '按钮组 ButtonGroup', path: '/ep/button-group' },
-            { index: 'ep-link', title: '链接 Link', path: '/ep/link' },
-            { index: 'ep-text', title: '文本 Text', path: '/ep/text' },
-            { index: 'ep-space', title: '间距 Space', path: '/ep/space' }
+            { index: 'ep-button', title: '按钮 Button', path: '/ep/button', sort: 1 },
+            { index: 'ep-button-group', title: '按钮组 ButtonGroup', path: '/ep/button-group', sort: 2 },
+            { index: 'ep-link', title: '链接 Link', path: '/ep/link', sort: 3 },
+            { index: 'ep-text', title: '文本 Text', path: '/ep/text', sort: 4 },
+            { index: 'ep-space', title: '间距 Space', path: '/ep/space', sort: 5 }
           ]
         },
         {
           index: 'ep-layout',
           title: '布局',
           path: '/ep/layout',
+          sort: 2,
           children: [
-            { index: 'ep-layout', title: '布局 Layout', path: '/ep/layout' },
-            { index: 'ep-container', title: '容器 Container', path: '/ep/container' },
-            { index: 'ep-progress', title: '进度条 Progress', path: '/ep/progress' }
+            { index: 'ep-layout', title: '布局 Layout', path: '/ep/layout', sort: 1 },
+            { index: 'ep-container', title: '容器 Container', path: '/ep/container', sort: 2 },
+            { index: 'ep-progress', title: '进度条 Progress', path: '/ep/progress', sort: 3 }
           ]
         },
         {
           index: 'ep-form',
           title: '表单',
           path: '/ep/form-root',
+          sort: 3,
           children: [
-            { index: 'ep-input', title: '输入框 Input', path: '/ep/input' },
-            { index: 'ep-input-number', title: '数字输入框 InputNumber', path: '/ep/input-number' },
-            { index: 'ep-select', title: '选择器 Select', path: '/ep/select' },
-            { index: 'ep-radio', title: '单选框 Radio', path: '/ep/radio' },
-            { index: 'ep-checkbox', title: '多选框 Checkbox', path: '/ep/checkbox' },
-            { index: 'ep-switch', title: '开关 Switch', path: '/ep/switch' },
-            { index: 'ep-slider', title: '滑块 Slider', path: '/ep/slider' },
-            { index: 'ep-rate', title: '评分 Rate', path: '/ep/rate' },
-            { index: 'ep-date', title: '日期 DatePicker', path: '/ep/date' },
-            { index: 'ep-time-picker', title: '时间选择器 TimePicker', path: '/ep/time-picker' },
-            { index: 'ep-time-select', title: '时间选择 TimeSelect', path: '/ep/time-select' },
-            { index: 'ep-transfer', title: '穿梭框 Transfer', path: '/ep/transfer' },
-            { index: 'ep-tree-select', title: '树形选择器 TreeSelect', path: '/ep/tree-select' },
-            { index: 'ep-cascader', title: '级联选择器 Cascader', path: '/ep/cascader' },
-            { index: 'ep-autocomplete', title: '自动补全 Autocomplete', path: '/ep/autocomplete' },
-            { index: 'ep-form-demo', title: '表单 Form', path: '/ep/form' }
+            { index: 'ep-input', title: '输入框 Input', path: '/ep/input', sort: 1 },
+            { index: 'ep-input-number', title: '数字输入框 InputNumber', path: '/ep/input-number', sort: 2 },
+            { index: 'ep-select', title: '选择器 Select', path: '/ep/select', sort: 3 },
+            { index: 'ep-radio', title: '单选框 Radio', path: '/ep/radio', sort: 4 },
+            { index: 'ep-checkbox', title: '多选框 Checkbox', path: '/ep/checkbox', sort: 5 },
+            { index: 'ep-switch', title: '开关 Switch', path: '/ep/switch', sort: 6 },
+            { index: 'ep-slider', title: '滑块 Slider', path: '/ep/slider', sort: 7 },
+            { index: 'ep-rate', title: '评分 Rate', path: '/ep/rate', sort: 8 },
+            { index: 'ep-date', title: '日期 DatePicker', path: '/ep/date', sort: 9 },
+            { index: 'ep-time-picker', title: '时间选择器 TimePicker', path: '/ep/time-picker', sort: 10 },
+            { index: 'ep-time-select', title: '时间选择 TimeSelect', path: '/ep/time-select', sort: 11 },
+            { index: 'ep-transfer', title: '穿梭框 Transfer', path: '/ep/transfer', sort: 12 },
+            { index: 'ep-tree-select', title: '树形选择器 TreeSelect', path: '/ep/tree-select', sort: 13 },
+            { index: 'ep-cascader', title: '级联选择器 Cascader', path: '/ep/cascader', sort: 14 },
+            { index: 'ep-autocomplete', title: '自动补全 Autocomplete', path: '/ep/autocomplete', sort: 15 },
+            { index: 'ep-form-demo', title: '表单 Form', path: '/ep/form', sort: 16 }
           ]
         },
         {
           index: 'ep-data',
           title: '数据展示',
           path: '/ep/data',
+          sort: 4,
           children: [
-            { index: 'ep-table', title: '表格 Table', path: '/ep/table' },
-            { index: 'ep-pagination', title: '分页 Pagination', path: '/ep/pagination' },
-            { index: 'ep-tag', title: '标签 Tag', path: '/ep/tag' },
-            { index: 'ep-calendar', title: '日历 Calendar', path: '/ep/calendar' },
-            { index: 'ep-image', title: '图片 Image', path: '/ep/image' },
-            { index: 'ep-avatar', title: '头像 Avatar', path: '/ep/avatar' },
-            { index: 'ep-badge', title: '徽章 Badge', path: '/ep/badge' },
-            { index: 'ep-collapse', title: '折叠面板 Collapse', path: '/ep/collapse' },
-            { index: 'ep-timeline', title: '时间线 Timeline', path: '/ep/timeline' },
-            { index: 'ep-empty', title: '空状态 Empty', path: '/ep/empty' },
-            { index: 'ep-result', title: '结果 Result', path: '/ep/result' },
-            { index: 'ep-skeleton', title: '骨架屏 Skeleton', path: '/ep/skeleton' },
-            { index: 'ep-scrollbar', title: '滚动条 Scrollbar', path: '/ep/scrollbar' },
-            { index: 'ep-carousel', title: '走马灯 Carousel', path: '/ep/carousel' },
-            { index: 'ep-popover', title: '弹出框 Popover', path: '/ep/popover' },
-            { index: 'ep-tooltip', title: '文字提示 Tooltip', path: '/ep/tooltip' },
-            { index: 'ep-anchor', title: '锚点 Anchor', path: '/ep/anchor' },
-            { index: 'ep-dropdown', title: '下拉菜单 Dropdown', path: '/ep/dropdown' },
-            { index: 'ep-page-header', title: '页头 Page Header', path: '/ep/page-header' }
+            { index: 'ep-table', title: '表格 Table', path: '/ep/table', sort: 1 },
+            { index: 'ep-pagination', title: '分页 Pagination', path: '/ep/pagination', sort: 2 },
+            { index: 'ep-tag', title: '标签 Tag', path: '/ep/tag', sort: 3 },
+            { index: 'ep-calendar', title: '日历 Calendar', path: '/ep/calendar', sort: 4 },
+            { index: 'ep-image', title: '图片 Image', path: '/ep/image', sort: 5 },
+            { index: 'ep-avatar', title: '头像 Avatar', path: '/ep/avatar', sort: 6 },
+            { index: 'ep-badge', title: '徽章 Badge', path: '/ep/badge', sort: 7 },
+            { index: 'ep-collapse', title: '折叠面板 Collapse', path: '/ep/collapse', sort: 8 },
+            { index: 'ep-timeline', title: '时间线 Timeline', path: '/ep/timeline', sort: 9 },
+            { index: 'ep-empty', title: '空状态 Empty', path: '/ep/empty', sort: 10 },
+            { index: 'ep-result', title: '结果 Result', path: '/ep/result', sort: 11 },
+            { index: 'ep-skeleton', title: '骨架屏 Skeleton', path: '/ep/skeleton', sort: 12 },
+            { index: 'ep-scrollbar', title: '滚动条 Scrollbar', path: '/ep/scrollbar', sort: 13 },
+            { index: 'ep-carousel', title: '走马灯 Carousel', path: '/ep/carousel', sort: 14 },
+            { index: 'ep-popover', title: '弹出框 Popover', path: '/ep/popover', sort: 15 },
+            { index: 'ep-tooltip', title: '文字提示 Tooltip', path: '/ep/tooltip', sort: 16 },
+            { index: 'ep-anchor', title: '锚点 Anchor', path: '/ep/anchor', sort: 17 },
+            { index: 'ep-dropdown', title: '下拉菜单 Dropdown', path: '/ep/dropdown', sort: 18 },
+            { index: 'ep-page-header', title: '页头 Page Header', path: '/ep/page-header', sort: 19 }
           ]
         },
         {
           index: 'ep-feedback',
           title: '反馈',
           path: '/ep/feedback',
+          sort: 5,
           children: [
-            { index: 'ep-dialog', title: '对话框 Dialog', path: '/ep/dialog' },
-            { index: 'ep-upload', title: '上传 Upload', path: '/ep/upload' },
-            { index: 'ep-notification', title: '通知 Notification', path: '/ep/notification' },
-            { index: 'ep-alert', title: '警告 Alert', path: '/ep/alert' },
-            { index: 'ep-loading', title: '加载 Loading', path: '/ep/loading' },
-            { index: 'ep-message', title: '消息 Message', path: '/ep/message' },
-            { index: 'ep-messagebox', title: '消息框 MessageBox', path: '/ep/messagebox' }
+            { index: 'ep-dialog', title: '对话框 Dialog', path: '/ep/dialog', sort: 1 },
+            { index: 'ep-upload', title: '上传 Upload', path: '/ep/upload', sort: 2 },
+            { index: 'ep-notification', title: '通知 Notification', path: '/ep/notification', sort: 3 },
+            { index: 'ep-alert', title: '警告 Alert', path: '/ep/alert', sort: 4 },
+            { index: 'ep-loading', title: '加载 Loading', path: '/ep/loading', sort: 5 },
+            { index: 'ep-message', title: '消息 Message', path: '/ep/message', sort: 6 },
+            { index: 'ep-messagebox', title: '消息框 MessageBox', path: '/ep/messagebox', sort: 7 }
           ]
         },
         {
           index: 'ep-navigation',
           title: '导航',
           path: '/ep/navigation',
+          sort: 6,
           children: [
-            { index: 'ep-tabs', title: '标签页 Tabs', path: '/ep/tabs' },
-            { index: 'ep-breadcrumb', title: '面包屑 Breadcrumb', path: '/ep/breadcrumb' },
-            { index: 'ep-steps', title: '步骤条 Steps', path: '/ep/steps' },
-            { index: 'ep-affix', title: '固钉 Affix', path: '/ep/affix' },
-            { index: 'ep-backtop', title: '回到顶部 Backtop', path: '/ep/backtop' }
+            { index: 'ep-tabs', title: '标签页 Tabs', path: '/ep/tabs', sort: 1 },
+            { index: 'ep-breadcrumb', title: '面包屑 Breadcrumb', path: '/ep/breadcrumb', sort: 2 },
+            { index: 'ep-steps', title: '步骤条 Steps', path: '/ep/steps', sort: 3 },
+            { index: 'ep-affix', title: '固钉 Affix', path: '/ep/affix', sort: 4 },
+            { index: 'ep-backtop', title: '回到顶部 Backtop', path: '/ep/backtop', sort: 5 }
           ]
         },
         {
           index: 'ep-other',
           title: '其他',
           path: '/ep/other',
+          sort: 7,
           children: [
-            { index: 'ep-divider', title: '分割线 Divider', path: '/ep/divider' },
-            { index: 'ep-config-provider', title: '全局配置 ConfigProvider', path: '/ep/config-provider' }
+            { index: 'ep-divider', title: '分割线 Divider', path: '/ep/divider', sort: 1 },
+            { index: 'ep-config-provider', title: '全局配置 ConfigProvider', path: '/ep/config-provider', sort: 2 }
           ]
         }
       ]
@@ -250,6 +285,11 @@ export const useMenuStore = defineStore('menu', () => {
    * @param {Object} newItem - 新的菜单项对象
    */
   const addMenuItem = (parentIndex, newItem) => {
+    // 确保新菜单项有排序值，默认为100
+    if (newItem.sort === undefined) {
+      newItem.sort = 100
+    }
+
     /**
      * 递归查找父级菜单并添加新菜单项
      * @param {Array} items - 菜单项数组
@@ -265,6 +305,8 @@ export const useMenuStore = defineStore('menu', () => {
           }
           // 添加新的菜单项
           item.children.push(newItem)
+          // 添加后立即排序
+          sortMenuItems(item.children)
           return true
         }
         // 如果有子菜单，递归查找
@@ -281,6 +323,8 @@ export const useMenuStore = defineStore('menu', () => {
     // 如果没有指定父级，则添加到根级别
     if (!parentIndex) {
       menuItems.value.push(newItem)
+      // 添加后立即排序
+      sortMenuItems(menuItems.value)
     } else {
       // 否则在指定父级下添加
       findParentAndAdd(menuItems.value)
@@ -356,6 +400,68 @@ export const useMenuStore = defineStore('menu', () => {
     }
 
     findAndRemove(menuItems.value)
+  }
+
+  // ==================== 菜单排序相关方法 ====================
+  
+  /**
+   * 对菜单项数组进行排序
+   * 根据sort字段进行排序，数值越小越靠前
+   * @param {Array} items - 菜单项数组
+   */
+  const sortMenuItems = (items) => {
+    if (!Array.isArray(items)) return
+    
+    // 对当前层级进行排序
+    items.sort((a, b) => {
+      const sortA = a.sort || 100
+      const sortB = b.sort || 100
+      return sortA - sortB
+    })
+    
+    // 递归排序子菜单
+    items.forEach(item => {
+      if (item.children && Array.isArray(item.children)) {
+        sortMenuItems(item.children)
+      }
+    })
+  }
+
+  /**
+   * 更新菜单项排序
+   * @param {string} index - 菜单项索引
+   * @param {number} newSort - 新的排序值
+   */
+  const updateMenuItemSort = (index, newSort) => {
+    /**
+     * 递归查找并更新菜单项排序
+     * @param {Array} items - 菜单项数组
+     * @returns {boolean} 是否成功更新
+     */
+    const findAndUpdateSort = (items) => {
+      for (let i = 0; i < items.length; i++) {
+        // 如果找到匹配的菜单项
+        if (items[i].index === index) {
+          items[i].sort = newSort
+          return true
+        }
+        // 如果有子菜单，递归查找
+        if (items[i].children && items[i].children.length > 0) {
+          const updated = findAndUpdateSort(items[i].children)
+          if (updated) {
+            return true
+          }
+        }
+      }
+      return false
+    }
+
+    const updated = findAndUpdateSort(menuItems.value)
+    if (updated) {
+      // 更新后重新排序整个菜单
+      sortMenuItems(menuItems.value)
+    }
+    return updated
   }
 
   // ==================== 面包屑相关方法 ====================
@@ -436,6 +542,10 @@ export const useMenuStore = defineStore('menu', () => {
     addMenuItem,       // 添加菜单项
     updateMenuItem,    // 更新菜单项
     removeMenuItem,    // 删除菜单项
+    
+    // 排序相关
+    sortMenuItems,         // 排序菜单项
+    updateMenuItemSort,    // 更新菜单项排序
     
     // 面包屑相关
     generateBreadcrumb,    // 生成面包屑数据

@@ -2,6 +2,9 @@
   <!-- 登录页面 - 作为应用入口 -->
   <Login v-if="!userStore.isLoggedIn" @login-success="handleLoginSuccess" />
 
+  <!-- 404页面 - 全屏显示 -->
+  <NotFound v-else-if="isNotFoundPage" />
+
   <!-- 主应用界面 - 登录后显示 -->
   <div v-else class="app-container">
     <!-- 顶部导航栏 -->
@@ -134,6 +137,7 @@ import RecursiveMenu from './components/RecursiveMenu.vue'
 import TabsNavigation from './components/TabsNavigation.vue'
 import Breadcrumb from './components/Breadcrumb.vue'
 import Login from './views/Login.vue'
+import NotFound from './views/NotFound.vue'
 import { useRoute, useRouter } from 'vue-router'
 import appRouter from './router/index.js'
 
@@ -145,8 +149,16 @@ const menuStore = useMenuStore()
 // 使用用户状态管理
 const userStore = useUserStore()
 
+// 获取路由实例
+const route = useRoute()
+
 // 搜索框的值
 const searchValue = ref('')
+
+// 判断是否为404页面
+const isNotFoundPage = computed(() => {
+  return route.name === 'NotFound'
+})
 
 // 缺失的图标集合
 const missingIcons = ref(new Set())
@@ -158,7 +170,6 @@ const searchSuggestions = ref([])
 const searchablePages = ref([])
 
 // 路由相关
-const route = useRoute()
 const router = useRouter()
 
 // 标签页管理
@@ -712,9 +723,11 @@ onMounted(() => {
   // 初始化用户状态（从本地存储恢复登录状态）
   userStore.initUserStore()
 
-  // 只有在已登录时才初始化搜索页面数据
+  // 只有在已登录时才初始化搜索页面数据和排序菜单
   if (userStore.isLoggedIn) {
     initSearchablePages()
+    // 初始化时对菜单进行排序
+    menuStore.sortMenuItems(menuStore.menuItems)
   }
 
   // 组件挂载时的其他初始化操作

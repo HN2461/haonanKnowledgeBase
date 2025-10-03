@@ -1,12 +1,6 @@
 <template>
   <div class="message-center">
-    <!-- 简单标题 -->
-    <div class="page-header">
-      <h1>开发记录</h1>
-      <p>项目功能开发时间轴</p>
-    </div>
-
-    <!-- 简单时间轴 -->
+    <!-- 时间轴内容 -->
     <div class="timeline-container">
       <el-timeline>
         <el-timeline-item
@@ -38,57 +32,44 @@
 <script setup>
 import { messageStore } from '../data/messageStore.js'
 
-// 格式化时间戳
+// 格式化时间戳 - 简单直接显示
 const formatTimestamp = (timestamp) => {
-  const date = new Date(timestamp)
-  return date.toLocaleString('zh-CN', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
+  // 直接从时间戳字符串中提取日期时间部分
+  const dateStr = timestamp.replace('T', ' ').replace('.000Z', '')
+  const [datePart, timePart] = dateStr.split(' ')
+  const [year, month, day] = datePart.split('-')
+  const [hours, minutes] = timePart.split(':')
+  
+  return `${year}/${month}/${day} ${hours}:${minutes}`
 }
 </script>
 
 <style scoped>
 .message-center {
-  padding: 20px;
+  padding: 40px;
   max-width: 1000px;
   margin: 0 auto;
 }
 
-.page-header {
-  text-align: center;
-  margin-bottom: 40px;
-  padding: 30px 0;
-  background: #f8f9fa;
-  border-radius: 8px;
-}
-
-.page-header h1 {
-  margin: 0 0 10px 0;
-  font-size: 28px;
-  font-weight: 600;
-  color: #303133;
-}
-
-.page-header p {
-  margin: 0;
-  font-size: 16px;
-  color: #606266;
-}
-
 .timeline-container {
   background: #fff;
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
 }
 
 .timeline-item {
-  padding: 20px 0;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 25px 0;
+  border-bottom: 1px solid #e8e8e8;
+  transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+  background: #fafafa;
+  margin: 0 -20px;
+  padding: 25px 20px;
+  border-radius: 8px;
 }
 
 .timeline-item:last-child {
@@ -96,16 +77,18 @@ const formatTimestamp = (timestamp) => {
 }
 
 .timeline-item h3 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
+  margin: 0 0 12px 0;
+  font-size: 19px;
   font-weight: 600;
-  color: #303133;
+  color: #2c3e50;
+  line-height: 1.4;
 }
 
 .timeline-item p {
-  margin: 0 0 15px 0;
-  color: #606266;
-  line-height: 1.6;
+  margin: 0 0 18px 0;
+  color: #5a6c7d;
+  line-height: 1.7;
+  font-size: 15px;
 }
 
 .tags {
@@ -135,15 +118,7 @@ const formatTimestamp = (timestamp) => {
 /* 响应式设计 */
 @media (max-width: 768px) {
   .message-center {
-    padding: 10px;
-  }
-  
-  .page-header {
-    padding: 20px 0;
-  }
-  
-  .page-header h1 {
-    font-size: 24px;
+    padding: 20px;
   }
   
   .timeline-container {

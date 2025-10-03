@@ -64,6 +64,7 @@ import AnchorDemo from '../views/elementPlus/AnchorDemo.vue'
 import DropdownDemo from '../views/elementPlus/DropdownDemo.vue'
 import PageHeaderDemo from '../views/elementPlus/PageHeaderDemo.vue'
 import MessageCenter from '../views/MessageCenter.vue'
+import PersonalDocs from '../views/PersonalDocs.vue'
 
 const routes = [
   {
@@ -166,16 +167,13 @@ const routes = [
   { path: '/ep/dropdown', name: 'EpDropdown', component: DropdownDemo, meta: { title: 'EP-下拉菜单', icon: 'ArrowDown' } },
   { path: '/ep/page-header', name: 'EpPageHeader', component: PageHeaderDemo, meta: { title: 'EP-页头', icon: 'Document' } },
   { path: '/message-center', name: 'MessageCenter', component: MessageCenter, meta: { title: '消息中心', icon: 'Bell' } },
+  { path: '/personal-docs', name: 'PersonalDocs', component: PersonalDocs, meta: { title: '个人技术文档', icon: 'Document' } },
   
-  // 404 页面 - 必须放在所有路由的最后
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
-    component: NotFound,
-    meta: {
-      title: '页面未找到'
-    }
-  }
+  // 404 页面路由
+  { path: '/404', name: 'NotFound', component: NotFound, meta: { title: '页面未找到' } },
+  
+  // 捕获所有未匹配的路由，重定向到404页面
+  { path: '/:pathMatch(.*)*', redirect: '/404' }
 ]
 
 const router = createRouter({

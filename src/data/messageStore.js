@@ -39,6 +39,126 @@ export const MESSAGE_STATUS = {
 // 注意：新消息请添加到数组开头，保持时间顺序（最新的在前）
 const messages = [
   {
+    id: 'msg-025',
+    timestamp: '2025-10-03T17:25:00.000Z',
+    type: MESSAGE_TYPES.SUCCESS,
+    status: MESSAGE_STATUS.PUBLISHED,
+    title: '🔧 修复404页面显示问题',
+    content: '修复404页面在应用布局内显示的问题，现在404页面会全屏显示，不再包含在侧边栏和头部导航中，提供更好的用户体验',
+    tags: ['Bug修复', '404页面', '全屏显示', '用户体验'],
+    icon: 'Tools',
+    author: '开发团队',
+    category: 'Bug修复'
+  },
+  {
+    id: 'msg-024',
+    timestamp: '2025-10-03T17:20:00.000Z',
+    type: MESSAGE_TYPES.SUCCESS,
+    status: MESSAGE_STATUS.PUBLISHED,
+    title: '📝 调整个人技术文档菜单结构',
+    content: '简化个人技术文档菜单结构，移除后端技术、开发工具、架构设计分类，去除前端技术的子菜单，新增随记文档分类，让菜单更加简洁实用',
+    tags: ['菜单优化', '结构简化', '随记文档', '用户体验'],
+    icon: 'EditPen',
+    author: '开发团队',
+    category: '界面优化'
+  },
+  {
+    id: 'msg-023',
+    timestamp: '2025-10-03T17:15:00.000Z',
+    type: MESSAGE_TYPES.SUCCESS,
+    status: MESSAGE_STATUS.PUBLISHED,
+    title: '📚 新增个人技术文档菜单',
+    content: '在左侧菜单中新增"个人技术文档"菜单项，包含前端技术、后端技术、开发工具、架构设计四个分类，用于存放个人总结的各种技术文档和知识点',
+    tags: ['菜单扩展', '文档管理', '技术总结', '知识库'],
+    icon: 'Document',
+    author: '开发团队',
+    category: '功能新增'
+  },
+  {
+    id: 'msg-022',
+    timestamp: '2025-10-03T17:10:00.000Z',
+    type: MESSAGE_TYPES.SUCCESS,
+    status: MESSAGE_STATUS.PUBLISHED,
+    title: '🗑️ 移除左侧标题区域',
+    content: '完全移除左侧标题区域，让时间轴内容占据全屏，采用居中卡片布局，让开发记录更加突出和易读',
+    tags: ['界面简化', '全屏布局', '内容突出', '用户体验'],
+    icon: 'Delete',
+    author: '开发团队',
+    category: '界面优化'
+  },
+  {
+    id: 'msg-021',
+    timestamp: '2025-10-03T17:05:00.000Z',
+    type: MESSAGE_TYPES.SUCCESS,
+    status: MESSAGE_STATUS.PUBLISHED,
+    title: '📍 左侧标题紧贴布局',
+    content: '调整左侧标题区域紧贴屏幕左上角，采用全屏高度设计，移除边距和圆角，让标题区域更加紧凑和突出',
+    tags: ['布局调整', '紧贴设计', '全屏高度', '界面优化'],
+    icon: 'Position',
+    author: '开发团队',
+    category: '界面优化'
+  },
+  {
+    id: 'msg-020',
+    timestamp: '2025-10-03T17:00:00.000Z',
+    type: MESSAGE_TYPES.SUCCESS,
+    status: MESSAGE_STATUS.PUBLISHED,
+    title: '🎨 左侧标题样式美化',
+    content: '优化左侧标题区域的设计，添加渐变背景、阴影效果和更好的字体样式，让整体布局更加美观协调',
+    tags: ['界面美化', '样式优化', '用户体验', '视觉设计'],
+    icon: 'Picture',
+    author: '开发团队',
+    category: '界面优化'
+  },
+  {
+    id: 'msg-019',
+    timestamp: '2025-10-03T16:50:00.000Z',
+    type: MESSAGE_TYPES.SUCCESS,
+    status: MESSAGE_STATUS.PUBLISHED,
+    title: '📐 开发记录布局优化',
+    content: '调整开发记录页面布局，标题放在左侧固定位置，中间区域专注于显示时间轴内容，提升阅读体验',
+    tags: ['布局优化', '用户体验', '界面设计', '响应式'],
+    icon: 'Grid',
+    author: '开发团队',
+    category: '界面优化'
+  },
+  {
+    id: 'msg-018',
+    timestamp: '2025-10-03T16:45:00.000Z',
+    type: MESSAGE_TYPES.INFO,
+    status: MESSAGE_STATUS.PUBLISHED,
+    title: '🕐 时间格式优化',
+    content: '进一步简化时间显示，直接从时间戳字符串提取显示，完全避免Date对象转换，确保填什么显示什么',
+    tags: ['时间显示', '格式优化', '字符串处理', 'Bug修复'],
+    icon: 'Clock',
+    author: '开发团队',
+    category: '问题修复'
+  },
+  {
+    id: 'msg-017',
+    timestamp: '2025-10-03T16:27:00.000Z',
+    type: MESSAGE_TYPES.SUCCESS,
+    status: MESSAGE_STATUS.PUBLISHED,
+    title: '🔢 菜单排序功能实现',
+    content: '为菜单项添加了排序功能，通过sort字段控制菜单显示顺序，数值越小越靠前，支持同一父菜单下的排序',
+    tags: ['菜单排序', '功能增强', '用户体验', '数据结构'],
+    icon: 'Sort',
+    author: '开发团队',
+    category: '功能开发'
+  },
+  {
+    id: 'msg-016',
+    timestamp: '2025-10-03T16:17:00.000Z',
+    type: MESSAGE_TYPES.SUCCESS,
+    status: MESSAGE_STATUS.PUBLISHED,
+    title: '📝 开发记录页面优化',
+    content: '简化了开发记录页面，采用简洁的时间轴设计，并完善了消息仓库的注释和快速添加指南',
+    tags: ['页面优化', '开发记录', '时间轴', '注释完善'],
+    icon: 'Document',
+    author: '开发团队',
+    category: '界面优化'
+  },
+  {
     id: 'msg-001',
     timestamp: '2025-10-01T09:00:00.000Z',
     type: MESSAGE_TYPES.PRIMARY,
@@ -525,4 +645,10 @@ export const MESSAGE_EXAMPLES = {
  *   author: '开发团队',
  *   category: '功能开发'
  * }
+ * 
+ * 菜单排序使用说明：
+ * - 在菜单项中添加 sort 字段，数值越小越靠前
+ * - 例如：{ index: 'ep-button', title: '按钮', path: '/ep/button', sort: 1 }
+ * - 使用 menuStore.updateMenuItemSort('ep-button', 1) 更新排序
+ * - 使用 menuStore.sortMenuItems(menuItems) 重新排序
  */
