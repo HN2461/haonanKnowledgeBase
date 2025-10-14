@@ -63,8 +63,12 @@ import TooltipDemo from '../views/elementPlus/TooltipDemo.vue'
 import AnchorDemo from '../views/elementPlus/AnchorDemo.vue'
 import DropdownDemo from '../views/elementPlus/DropdownDemo.vue'
 import PageHeaderDemo from '../views/elementPlus/PageHeaderDemo.vue'
+import DrawerDemo from '../views/elementPlus/DrawerDemo.vue'
+import PopconfirmDemo from '../views/elementPlus/PopconfirmDemo.vue'
+import TreeDemo from '../views/elementPlus/TreeDemo.vue'
 import MessageCenter from '../views/MessageCenter.vue'
 import PersonalDocs from '../views/PersonalDocs.vue'
+import PersonalDocsCategory from '../views/PersonalDocsCategory.vue'
 
 const routes = [
   {
@@ -166,8 +170,17 @@ const routes = [
   { path: '/ep/anchor', name: 'EpAnchor', component: AnchorDemo, meta: { title: 'EP-锚点', icon: 'Link' } },
   { path: '/ep/dropdown', name: 'EpDropdown', component: DropdownDemo, meta: { title: 'EP-下拉菜单', icon: 'ArrowDown' } },
   { path: '/ep/page-header', name: 'EpPageHeader', component: PageHeaderDemo, meta: { title: 'EP-页头', icon: 'Document' } },
-  { path: '/message-center', name: 'MessageCenter', component: MessageCenter, meta: { title: '消息中心', icon: 'Bell' } },
+  { path: '/ep/drawer', name: 'EpDrawer', component: DrawerDemo, meta: { title: 'EP-抽屉', icon: 'Menu' } },
+  { path: '/ep/popconfirm', name: 'EpPopconfirm', component: PopconfirmDemo, meta: { title: 'EP-气泡确认框', icon: 'QuestionFilled' } },
+  { path: '/ep/tree', name: 'EpTree', component: TreeDemo, meta: { title: 'EP-树形控件', icon: 'List' } },
+  { path: '/message-center', name: 'MessageCenter', component: MessageCenter, meta: { title: '开发记录', icon: 'Bell' } },
   { path: '/personal-docs', name: 'PersonalDocs', component: PersonalDocs, meta: { title: '个人技术文档', icon: 'Document' } },
+  { path: '/personal-docs/frontend', name: 'PersonalDocsFrontend', component: PersonalDocsCategory, meta: { title: '前端技术', icon: 'Monitor' } },
+  { path: '/personal-docs/backend', name: 'PersonalDocsBackend', component: PersonalDocsCategory, meta: { title: '后端技术', icon: 'Server' } },
+  { path: '/personal-docs/database', name: 'PersonalDocsDatabase', component: PersonalDocsCategory, meta: { title: '数据库技术', icon: 'Coin' } },
+  { path: '/personal-docs/devops', name: 'PersonalDocsDevops', component: PersonalDocsCategory, meta: { title: '运维部署', icon: 'Setting' } },
+  { path: '/personal-docs/tools', name: 'PersonalDocsTools', component: PersonalDocsCategory, meta: { title: '开发工具', icon: 'Tools' } },
+  { path: '/personal-docs/notes', name: 'PersonalDocsNotes', component: PersonalDocsCategory, meta: { title: '随记文档', icon: 'EditPen' } },
   
   // 404 页面路由
   { path: '/404', name: 'NotFound', component: NotFound, meta: { title: '页面未找到' } },

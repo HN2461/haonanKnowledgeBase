@@ -58,10 +58,38 @@ export const useMenuStore = defineStore('menu', () => {
           children: []
         },
         {
+          index: 'docs-backend',
+          title: '后端技术',
+          path: '/personal-docs/backend',
+          sort: 2,
+          children: []
+        },
+        {
+          index: 'docs-database',
+          title: '数据库技术',
+          path: '/personal-docs/database',
+          sort: 3,
+          children: []
+        },
+        {
+          index: 'docs-devops',
+          title: '运维部署',
+          path: '/personal-docs/devops',
+          sort: 4,
+          children: []
+        },
+        {
+          index: 'docs-tools',
+          title: '开发工具',
+          path: '/personal-docs/tools',
+          sort: 5,
+          children: []
+        },
+        {
           index: 'docs-notes',
           title: '随记文档',
           path: '/personal-docs/notes',
-          sort: 2,
+          sort: 6,
           children: []
         }
       ]
@@ -149,7 +177,10 @@ export const useMenuStore = defineStore('menu', () => {
             { index: 'ep-tooltip', title: '文字提示 Tooltip', path: '/ep/tooltip', sort: 16 },
             { index: 'ep-anchor', title: '锚点 Anchor', path: '/ep/anchor', sort: 17 },
             { index: 'ep-dropdown', title: '下拉菜单 Dropdown', path: '/ep/dropdown', sort: 18 },
-            { index: 'ep-page-header', title: '页头 Page Header', path: '/ep/page-header', sort: 19 }
+            { index: 'ep-page-header', title: '页头 Page Header', path: '/ep/page-header', sort: 19 },
+            { index: 'ep-drawer', title: '抽屉 Drawer', path: '/ep/drawer', sort: 20 },
+            { index: 'ep-popconfirm', title: '气泡确认框 Popconfirm', path: '/ep/popconfirm', sort: 21 },
+            { index: 'ep-tree', title: '树形控件 Tree', path: '/ep/tree', sort: 22 }
           ]
         },
         {
